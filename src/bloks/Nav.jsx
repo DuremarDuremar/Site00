@@ -4,14 +4,15 @@ import logo from "../img/logo.jpg";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  max-width: 1440px;
+  max-width: 100%;
+  height: 80px;
+  margin: 0px auto;
 `;
 const Content = styled.div`
   max-width: 1206px;
   margin: 0px auto;
   background-color: Azure;
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
 `;
 
@@ -40,7 +41,7 @@ const Menu = styled.ul`
 const Links = styled.ul`
   display: flex;
   margin-left: auto;
-  margin-right: 44px;
+  margin-right: 3.3vw;
   li {
     :not(:last-child) {
       margin-right: 35px;
@@ -58,6 +59,7 @@ const Nav = () => {
         <Logo>
           <img src={logo} alt="" />
         </Logo>
+
         <Menu>
           <li>Home</li>
           <li>Blog</li>
@@ -80,6 +82,7 @@ const Nav = () => {
             <i className="fa fa-instagram" aria-hidden="true"></i>
           </li>
         </Links>
+
         <NavButton>
           <p>Get started</p>
         </NavButton>
