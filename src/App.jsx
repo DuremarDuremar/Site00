@@ -1,6 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import Nav from "./bloks/Nav.jsx";
 // import Hero from "./bloks/Hero.jsx";
 // import Costumers from "./bloks/Costumers.jsx";
@@ -13,35 +13,44 @@ import Nav from "./bloks/Nav.jsx";
 // import Faq from "./bloks/Faq.jsx";
 // import NewsLetter from "./bloks/NewsLetter.jsx";
 
-const All = styled.div`
-  * {
-    box-sizing: border-box;
-    font-family: Quicksand;
-    font-weight: 500;
-  }
-  ul {
+const Global = createGlobalStyle`
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  font-family: Quicksand;
+  font-weight: 500;
+}
+ul {
     padding-inline-start: 0;
   }
-  li {
+li {
     list-style-type: none;
     cursor: pointer;
   }
+
+`;
+
+const All = styled.div`
   max-width: 1440px;
   margin: 0px auto;
 `;
 
 const App = () => {
   const res900 = useMediaQuery({
-    query: "(min-device-width: 900px)",
+    query: "(min-width: 900px)",
   });
   const res600 = useMediaQuery({
-    query: "(min-device-width: 600px)",
+    query: "(min-width: 600px)",
   });
 
   return (
-    <All>
-      <Nav />
-    </All>
+    <>
+      <Global />
+      <All>
+        <Nav res900={res900} res600={res600} />
+      </All>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../components";
+import Button from "../components/Button";
 import logo from "../img/logo.jpg";
 import styled from "styled-components";
 
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `;
 const Content = styled.div`
   max-width: 1206px;
-  margin: 0px auto;
+  margin: 19px auto 0;
   background-color: Azure;
   display: flex;
   align-items: center;
@@ -18,6 +18,11 @@ const Content = styled.div`
 
 const Logo = styled.div`
   margin-right: 5.4vw;
+  ${(props) =>
+    !props.res900 &&
+    `
+    cursor: pointer;
+  `}
   img {
     display: block;
     max-width: 50px;
@@ -48,16 +53,13 @@ const Links = styled.ul`
     }
   }
 `;
-const NavButton = styled(Button)`
-  margin-right: 0;
-`;
 
-const Nav = () => {
+const Nav = ({ res600, res900 }) => {
   return (
     <Wrapper>
       <Content>
-        <Logo>
-          <img src={logo} alt="" />
+        <Logo res900={res900}>
+          <img src={logo} alt="logo" />
         </Logo>
 
         <Menu>
@@ -83,9 +85,9 @@ const Nav = () => {
           </li>
         </Links>
 
-        <NavButton>
+        <Button>
           <p>Get started</p>
-        </NavButton>
+        </Button>
       </Content>
     </Wrapper>
   );
