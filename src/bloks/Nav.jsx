@@ -101,7 +101,7 @@ const Links = styled.ul`
   `}
   li {
     :not(:last-child) {
-      margin-right: 35px;
+      margin-right: calc(22px + 1vw);
     }
   }
 `;
@@ -154,7 +154,7 @@ const Nav = ({ res600, res900 }) => {
           </li>
         </Links>
 
-        <Button>
+        <Button width={!res600 && "90px"}>
           <p>Get started</p>
         </Button>
       </Content>
