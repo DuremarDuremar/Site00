@@ -38,6 +38,7 @@ const All = styled.div`
 
 const App = () => {
   const [logoImg, setLogoImg] = useState(false);
+  const [menuActiv, setMenuActiv] = useState(1);
 
   const res900 = useMediaQuery({
     query: "(min-width: 900px)",
@@ -55,6 +56,8 @@ const App = () => {
           res600={res600}
           logoImg={logoImg}
           setLogoImg={setLogoImg}
+          menuActiv={menuActiv}
+          setMenuActiv={setMenuActiv}
         />
         <Hero />
         <Costumers />

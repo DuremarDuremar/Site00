@@ -58,7 +58,7 @@ const Menu = styled.ul`
   font-size: 12px;
   line-height: 15px;
   letter-spacing: 0.05em;
-  color: #697ca6;
+  /* color: #697ca6; */
   text-shadow: 0px 0px 5px #e6e6e6;
   li {
     :not(:last-child) {
@@ -66,6 +66,11 @@ const Menu = styled.ul`
     }
   }
 `;
+
+const MenuLi = styled.li`
+  color: ${(props) => (props.active === "true" ? "#5e81fe" : "#697ca6")};
+`;
+
 const AdapMenu = styled(Menu)`
   font-size: 15px;
   line-height: 18px;
@@ -106,7 +111,14 @@ const Links = styled.ul`
   }
 `;
 
-const Nav = ({ res600, res900, logoImg, setLogoImg }) => {
+const Nav = ({
+  res600,
+  res900,
+  logoImg,
+  setLogoImg,
+  menuActiv,
+  setMenuActiv,
+}) => {
   ///////////////////////////////////////
 
   useEffect(() => {
@@ -117,9 +129,15 @@ const Nav = ({ res600, res900, logoImg, setLogoImg }) => {
 
   /////////////////////////////////////////////////////
 
+  console.log(menuActiv);
+
   const Items = ["Home", "Blog", "Features", "Pricing", "Documentation"].map(
-    (item) => {
-      return <li key={item}>{item}</li>;
+    (item, index) => {
+      return (
+        <MenuLi active={menuActiv === index + 1 ? "true" : "false"} key={item}>
+          {item}
+        </MenuLi>
+      );
     }
   );
 
