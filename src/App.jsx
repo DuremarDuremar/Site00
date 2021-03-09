@@ -59,7 +59,7 @@ const App = () => {
           menuActiv={menuActiv}
           setMenuActiv={setMenuActiv}
         />
-        <Hero />
+        <Hero logoImg={logoImg} />
         <Costumers />
         <Plan />
         <Features />

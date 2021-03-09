@@ -6,17 +6,15 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   max-width: 100%;
-  height: 80px;
-  /* margin: 0px auto; */
+  height: 60px;
   transition: all ease-out 0.35s;
 `;
 const Content = styled.div`
   max-width: 1216px;
   margin: 19px auto 0;
-  /* background-color: Azure; */
   display: flex;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 10px 3px;
 
   ${(props) =>
     !props.res900 &&
@@ -58,7 +56,6 @@ const Menu = styled.ul`
   font-size: 12px;
   line-height: 15px;
   letter-spacing: 0.05em;
-  /* color: #697ca6; */
   text-shadow: 0px 0px 5px #e6e6e6;
   li {
     :not(:last-child) {
@@ -105,6 +102,11 @@ const Links = styled.ul`
     margin-right: auto;
   `}
   li {
+    color: #697ca6;
+    transition: all ease-out 0.35s;
+    :hover {
+      color: #5e81fe;
+    }
     :not(:last-child) {
       margin-right: calc(22px + 1vw);
     }
