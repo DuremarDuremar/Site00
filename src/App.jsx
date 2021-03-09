@@ -60,7 +60,7 @@ const App = () => {
           setMenuActiv={setMenuActiv}
         />
         <Hero logoImg={logoImg} />
-        <Costumers />
+        <Costumers res900={res900} res600={res600} />
         <Plan />
         <Features />
       </All>
