@@ -7,13 +7,13 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   max-width: 100%;
   height: 80px;
-  margin: 0px auto;
+  /* margin: 0px auto; */
   transition: all ease-out 0.35s;
 `;
 const Content = styled.div`
   max-width: 1216px;
   margin: 19px auto 0;
-  background-color: Azure;
+  /* background-color: Azure; */
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -129,12 +129,14 @@ const Nav = ({
 
   /////////////////////////////////////////////////////
 
-  console.log(menuActiv);
-
   const Items = ["Home", "Blog", "Features", "Pricing", "Documentation"].map(
     (item, index) => {
       return (
-        <MenuLi active={menuActiv === index + 1 ? "true" : "false"} key={item}>
+        <MenuLi
+          active={menuActiv === index + 1 ? "true" : "false"}
+          key={item}
+          onClick={() => setMenuActiv(index + 1)}
+        >
           {item}
         </MenuLi>
       );
