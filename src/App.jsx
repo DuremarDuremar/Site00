@@ -46,6 +46,9 @@ const App = () => {
   const res600 = useMediaQuery({
     query: "(min-width: 600px)",
   });
+  const res450 = useMediaQuery({
+    query: "(min-width: 450px)",
+  });
 
   return (
     <>
@@ -60,7 +63,7 @@ const App = () => {
           setMenuActiv={setMenuActiv}
         />
         <Hero logoImg={logoImg} />
-        <Costumers res900={res900} res600={res600} />
+        <Costumers res900={res900} res450={res450} />
         <Plan />
         <Features />
       </All>

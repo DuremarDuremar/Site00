@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 const svg01 = (
   <svg
@@ -92,25 +92,82 @@ const Content = styled.ul`
     props.res900 ? "space-between" : "space-evenly"};
   align-items: center;
   padding: 60px 11px;
+  i {
+    cursor: pointer;
+    color: #697ca6;
+    :hover {
+      color: #5e81fe;
+    }
+  }
 `;
 
-const Svg = styled.li``;
+const SvgItem = styled.li``;
 
-const Costumers = ({ res600, res900 }) => {
+const Costumers = ({ res450, res900 }) => {
   const [svgUse1, setSvgUse1] = useState(0);
   const [svgUse2, setSvgUse2] = useState(1);
-  const items = [svg01, svg02, svg03, svg04, svg05];
-  const svgs = items.map((item, index) => {
-    if ((!res900 && index === svgUse1) || (!res900 && index === svgUse2)) {
-      return <Svg key={index}>{item}</Svg>;
-    } else if (res900) {
-      return <Svg key={index}>{item}</Svg>;
+  const [arrayReverse, setArrayReverse] = useState(false);
+
+  //слайдер для адаптива
+  useEffect(() => {
+    if (svgUse1 > 4) {
+      setSvgUse1(0);
+    } else if (svgUse1 < 0) {
+      setSvgUse1(4);
+    }
+    if (svgUse2 > 4) {
+      setSvgUse2(0);
+    } else if (svgUse2 < 0) {
+      setSvgUse2(4);
+    }
+  }, [svgUse1, setSvgUse1, svgUse2, setSvgUse2]);
+
+  //последний айтем в конец
+  useEffect(() => {
+    if (svgUse2 === 0) {
+      setArrayReverse(true);
+    } else {
+      setArrayReverse(false);
+    }
+  }, [svgUse2, setArrayReverse]);
+
+  console.log(res450);
+
+  const svgs = [svg01, svg02, svg03, svg04, svg05].map((item, index) => {
+    if (!res900 && res450) {
+      return index === svgUse1 || index === svgUse2 ? (
+        <SvgItem key={index}>{item}</SvgItem>
+      ) : null;
+    } else if (!res450) {
+      return index === svgUse1 ? <SvgItem key={index}>{item}</SvgItem> : null;
+    } else {
+      return <SvgItem key={index}>{item}</SvgItem>;
     }
   });
 
   return (
     <Wrapper>
-      <Content>{svgs}</Content>
+      <Content>
+        {!res900 && (
+          <i
+            className="fas fa-angle-left fa-2x"
+            onClick={() => {
+              setSvgUse1(svgUse1 - 1);
+              setSvgUse2(svgUse2 - 1);
+            }}
+          ></i>
+        )}
+        {!arrayReverse ? svgs : svgs.reverse()}
+        {!res900 && (
+          <i
+            className="fas fa-angle-right fa-2x"
+            onClick={() => {
+              setSvgUse1(svgUse1 + 1);
+              setSvgUse2(svgUse2 + 1);
+            }}
+          ></i>
+        )}
+      </Content>
     </Wrapper>
   );
 };
