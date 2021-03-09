@@ -101,7 +101,15 @@ const Content = styled.ul`
   }
 `;
 
-const SvgItem = styled.li``;
+const SvgItem = styled.li`
+  max-height: 28.94px;
+  svg path {
+    transition: all ease-out 0.75s;
+  }
+  :hover svg path {
+    fill: #5e81fe;
+  }
+`;
 
 const Costumers = ({ res450, res900 }) => {
   const [svgUse1, setSvgUse1] = useState(0);
@@ -130,8 +138,6 @@ const Costumers = ({ res450, res900 }) => {
       setArrayReverse(false);
     }
   }, [svgUse2, setArrayReverse]);
-
-  console.log(res450);
 
   const svgs = [svg01, svg02, svg03, svg04, svg05].map((item, index) => {
     if (!res900 && res450) {

@@ -75,6 +75,7 @@ const AdapMenu = styled(Menu)`
   background-color: #f5f8ff;
   flex-wrap: wrap;
   margin: 0px auto;
+  border-radius: 30px 30px 0 0;
   li {
     display: block;
     margin: 0px auto;

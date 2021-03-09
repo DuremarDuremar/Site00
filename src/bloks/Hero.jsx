@@ -48,7 +48,13 @@ const Hero = ({ logoImg }) => {
   return (
     <Wrapper>
       <Content logoImg={logoImg}>
-        <TitleText>
+        <TitleText
+          shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+          fontWeighth1="300"
+          fontSizeh1="48px"
+          lineHeighth1="60px"
+          paddingToph1="16px"
+        >
           <h4>PLAN YOUR LIFE</h4>
           <h1>Increase your productivity</h1>
           <p>

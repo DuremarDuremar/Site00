@@ -14,22 +14,22 @@ const StyledTitleText = styled.div`
     text-align: center;
   }
   h1 {
-    padding-top: 16px;
-    font-weight: 300;
-    font-size: 48px;
-    line-height: 60px;
+    padding-top: ${(props) => props.paddingToph1 || "20px"};
+    font-weight: ${(props) => props.fontWeighth1 || "500"};
+    font-size: ${(props) => props.fontSizeh1 || "36px"};
+    line-height: ${(props) => props.lineHeighth1 || "45px"};
     text-align: center;
     color: #3d4f9f;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-shadow: ${(props) => props.shadow || "none"};
   }
   p {
-    padding-top: 28px;
-    max-width: 502px;
+    padding-top: ${(props) => props.paddingTopP || "28px"};
+    max-width: ${(props) => props.maxWidthP || "502px"};
     font-family: Roboto;
     font-weight: normal;
     font-size: 15px;
     line-height: 29px;
-    text-align: center;
+    text-align: ${(props) => props.textAlignP || "center"};
     letter-spacing: 0.03em;
     color: #8d96bd;
     margin: 0px auto;
