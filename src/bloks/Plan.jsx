@@ -7,7 +7,7 @@ const Content = styled.div``;
 const Plan = () => {
   return (
     <Wrapper>
-      <Content>22</Content>
+      <Content>Plan</Content>
     </Wrapper>
   );
 };

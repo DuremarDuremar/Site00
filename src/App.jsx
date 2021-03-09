@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import styled, { createGlobalStyle } from "styled-components";
 import Nav from "./bloks/Nav.jsx";
-// import Hero from "./bloks/Hero.jsx";
-// import Costumers from "./bloks/Costumers.jsx";
-// import Plan from "./bloks/Plan.jsx";
-// import Features from "./bloks/Features.jsx";
+import Hero from "./bloks/Hero.jsx";
+import Costumers from "./bloks/Costumers.jsx";
+import Plan from "./bloks/Plan.jsx";
+import Features from "./bloks/Features.jsx";
 // import Stats from "./bloks/Stats.jsx";
 // import Blog from "./bloks/Blog.jsx";
 // import Quotes from "./bloks/Quotes.jsx";
@@ -37,6 +37,8 @@ const All = styled.div`
 `;
 
 const App = () => {
+  const [logoImg, setLogoImg] = useState(false);
+
   const res900 = useMediaQuery({
     query: "(min-width: 900px)",
   });
@@ -48,7 +50,16 @@ const App = () => {
     <>
       <Global />
       <All>
-        <Nav res900={res900} res600={res600} />
+        <Nav
+          res900={res900}
+          res600={res600}
+          logoImg={logoImg}
+          setLogoImg={setLogoImg}
+        />
+        <Hero />
+        <Costumers />
+        <Plan />
+        <Features />
       </All>
     </>
   );

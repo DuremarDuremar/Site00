@@ -7,7 +7,7 @@ const Content = styled.div``;
 const Features = () => {
   return (
     <Wrapper>
-      <Content>22</Content>
+      <Content>Features</Content>
     </Wrapper>
   );
 };

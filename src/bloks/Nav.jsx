@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Button from "../components/Button";
 import logo from "../img/logo.jpg";
 import logoactiv from "../img/logoactiv.jpg";
@@ -30,7 +30,7 @@ const Logo = styled.div`
     props.res900 &&
     `
     pointer-events: none;
-    margin-right: 5.4vw;
+    
   `}
 
   ${(props) =>
@@ -42,7 +42,7 @@ const Logo = styled.div`
     }
   `}
    margin-right: ${(props) =>
-    props.logoImg && !props.res900 ? "10px" : "auto"};
+    props.logoImg && !props.res900 ? "auto" : props.res900 ? "5.4vw" : "10px"};
 
   img {
     display: block;
@@ -72,7 +72,7 @@ const AdapMenu = styled(Menu)`
   max-width: 600px;
   background-color: #f5f8ff;
   flex-wrap: wrap;
-
+  margin: 0px auto;
   li {
     display: block;
     margin: 0px auto;
@@ -106,18 +106,22 @@ const Links = styled.ul`
   }
 `;
 
-const Nav = ({ res600, res900 }) => {
+const Nav = ({ res600, res900, logoImg, setLogoImg }) => {
   ///////////////////////////////////////
-
-  const [logoImg, setLogoImg] = useState(false);
 
   useEffect(() => {
     if (res900) {
       setLogoImg(false);
     }
-  }, [res900]);
+  }, [res900, setLogoImg]);
 
   /////////////////////////////////////////////////////
+
+  const Items = ["Home", "Blog", "Features", "Pricing", "Documentation"].map(
+    (item) => {
+      return <li key={item}>{item}</li>;
+    }
+  );
 
   return (
     <Wrapper>
@@ -130,15 +134,7 @@ const Nav = ({ res600, res900 }) => {
           <img src={logoImg ? logoactiv : logo} alt="logo" />
         </Logo>
 
-        {res900 && (
-          <Menu>
-            <li>Home</li>
-            <li>Blog</li>
-            <li>Features</li>
-            <li>Pricing</li>
-            <li>Documentation</li>
-          </Menu>
-        )}
+        {res900 && <Menu>{Items}</Menu>}
         <Links logoImg={logoImg} res900={res900}>
           <li>
             <i className="fa fa-facebook" aria-hidden="true"></i>
@@ -154,19 +150,11 @@ const Nav = ({ res600, res900 }) => {
           </li>
         </Links>
 
-        <Button width={!res600 && "90px"}>
+        <Button width={!res600 ? "90px" : "113px"}>
           <p>Get started</p>
         </Button>
       </Content>
-      {logoImg && (
-        <AdapMenu>
-          <li>Home</li>
-          <li>Blog</li>
-          <li>Features</li>
-          <li>Pricing</li>
-          <li>Documentation</li>
-        </AdapMenu>
-      )}
+      {logoImg && <AdapMenu>{Items}</AdapMenu>}
     </Wrapper>
   );
 };
