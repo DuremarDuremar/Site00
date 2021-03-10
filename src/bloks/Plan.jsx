@@ -9,17 +9,18 @@ import Button from "../components/Button";
 const Wrapper = styled.div`
   max-width: 100%;
   background-color: #f5f8ff;
-  height: 676px;
   display: flex;
   align-items: center;
+  height: ${(props) => (props.res900 ? "676px" : "900px")};
 `;
 const Content = styled.div`
   max-width: 1120px;
   display: flex;
   padding: 0 15px;
   margin: 0px auto;
-  height: 436px;
+  height: ${(props) => (props.res900 ? " 436px" : "780px")};
   align-items: flex-end;
+  flex-direction: ${(props) => (props.res900 ? "row" : "column")};
 `;
 
 const Illustration = styled.div`
@@ -59,6 +60,22 @@ const ImgItem = styled.div`
   }
 `;
 
+const Illustration900 = styled.div`
+  position: relative;
+  max-width: 100%;
+  display: block;
+  margin: 0px auto;
+  img {
+    display: block;
+    max-width: 100%;
+    :last-child {
+      position: absolute;
+      top: 5%;
+      left: 0;
+    }
+  }
+`;
+
 const LeftBlock = styled.div`
   button {
     margin-top: 60px;
@@ -68,12 +85,10 @@ const LeftBlock = styled.div`
   }
 `;
 
-const Plan = ({ res1350 }) => {
-  console.log(res1350);
-
+const Plan = ({ res1350, res900 }) => {
   return (
-    <Wrapper>
-      <Content>
+    <Wrapper res900={res900}>
+      <Content res900={res900}>
         <LeftBlock>
           <TitleText
             textAlignP="left"
@@ -118,17 +133,24 @@ const Plan = ({ res1350 }) => {
           </Button>
         </LeftBlock>
 
-        <Illustration res1350={res1350}>
-          <ImgItem img1>
-            <img src={Image01} alt="1" />
-          </ImgItem>
-          <ImgItem img2>
+        {res900 ? (
+          <Illustration res1350={res1350}>
+            <ImgItem img1>
+              <img src={Image01} alt="1" />
+            </ImgItem>
+            <ImgItem img2>
+              <img src={Image02} alt="2" />
+            </ImgItem>
+            <ImgItem img3>
+              <img src={Image03} alt="3" />
+            </ImgItem>
+          </Illustration>
+        ) : (
+          <Illustration900>
             <img src={Image02} alt="2" />
-          </ImgItem>
-          <ImgItem img3>
-            <img src={Image03} alt="3" />
-          </ImgItem>
-        </Illustration>
+            <img src={Image01} alt="1" />
+          </Illustration900>
+        )}
       </Content>
     </Wrapper>
   );
