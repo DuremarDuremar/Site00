@@ -9,16 +9,17 @@ import Button from "../components/Button";
 const Wrapper = styled.div`
   max-width: 100%;
   background-color: #f5f8ff;
-  height: 776px;
+  height: 676px;
+  display: flex;
+  align-items: center;
 `;
 const Content = styled.div`
   max-width: 1120px;
   display: flex;
-  padding: 0 10px;
+  padding: 0 15px;
   margin: 0px auto;
-  /* background-color: azure; */
   height: 436px;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 const Illustration = styled.div`
@@ -26,11 +27,13 @@ const Illustration = styled.div`
   width: 653px;
   height: 436px;
   position: relative;
+  top: -5%;
+  overflow: ${(props) => (props.res1350 ? "visible" : "scroll")};
 `;
 
 const ImgItem = styled.div`
   position: absolute;
-  height: 100%;
+  max-height: 100%;
   ${(props) =>
     props.img3 &&
     `
@@ -65,7 +68,9 @@ const LeftBlock = styled.div`
   }
 `;
 
-const Plan = () => {
+const Plan = ({ res1350 }) => {
+  console.log(res1350);
+
   return (
     <Wrapper>
       <Content>
@@ -105,14 +110,15 @@ const Plan = () => {
           </Button>
           <Button
             width="130px"
-            background="none"
+            background="#f5f8ff"
             border="1px solid #D1D1E4"
             color="#ADB4D2"
           >
             <p>See features</p>
           </Button>
         </LeftBlock>
-        <Illustration>
+
+        <Illustration res1350={res1350}>
           <ImgItem img1>
             <img src={Image01} alt="1" />
           </ImgItem>

@@ -40,6 +40,9 @@ const App = () => {
   const [logoImg, setLogoImg] = useState(false);
   const [menuActiv, setMenuActiv] = useState(1);
 
+  const res1350 = useMediaQuery({
+    query: "(min-width: 1350px)",
+  });
   const res900 = useMediaQuery({
     query: "(min-width: 900px)",
   });
@@ -64,7 +67,7 @@ const App = () => {
         />
         <Hero logoImg={logoImg} />
         <Costumers res900={res900} res450={res450} />
-        <Plan />
+        <Plan res1350={res1350} />
         <Features />
       </All>
     </>
