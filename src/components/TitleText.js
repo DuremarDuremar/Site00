@@ -11,14 +11,14 @@ const StyledTitleText = styled.div`
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #3d4f9f;
-    text-align: center;
+    text-align: ${(props) => props.textAlignh4 || "center"};
   }
   h1 {
     padding-top: ${(props) => props.paddingToph1 || "20px"};
     font-weight: ${(props) => props.fontWeighth1 || "500"};
     font-size: ${(props) => props.fontSizeh1 || "36px"};
     line-height: ${(props) => props.lineHeighth1 || "45px"};
-    text-align: center;
+    text-align: ${(props) => props.textAlignh1 || "center"};
     color: #3d4f9f;
     text-shadow: ${(props) => props.shadow || "none"};
   }

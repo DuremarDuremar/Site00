@@ -7,7 +7,7 @@ const StyledButton = styled.button`
   background: ${(props) => props.background || "#d2e1ff"};
   border-radius: 2px;
   outline: none;
-  border: none;
+  border: ${(props) => props.border || "none"};
   cursor: pointer;
 
   p {
