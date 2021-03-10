@@ -30,7 +30,7 @@ const Play = styled.div`
   justify-content: center;
   margin: 20px auto 0;
   cursor: pointer;
-  transition: all ease-out 0.75s;
+  transition: all ease-out 1.75s;
   :hover i {
     color: #fff;
   }
