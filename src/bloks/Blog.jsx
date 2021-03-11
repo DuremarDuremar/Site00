@@ -6,6 +6,29 @@ import Blog0103 from "../img/blog3.jpg";
 import TitleText from "../components/TitleText";
 import Button from "../components/Button";
 
+const lupa = (
+  <svg
+    width="19"
+    height="18"
+    viewBox="0 0 19 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M13.1138 7.01428C13.1138 10.29 10.4548 12.9475 7.17224 12.9475C3.8897 12.9475 1.23071 10.29 1.23071 7.01428C1.23071 3.73858 3.8897 1.08105 7.17224 1.08105C10.4548 1.08105 13.1138 3.73858 13.1138 7.01428Z"
+      stroke="#A7AAC6"
+      strokeWidth="2"
+    />
+    <path
+      d="M12.1304 11.9666L17.0886 16.9189"
+      stroke="#A7AAC6"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const Wrapper = styled.div`
   max-width: 100%;
   height: 865px;
@@ -14,9 +37,22 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+const Arrow = styled.div`
+  cursor: pointer;
+  margin: ${(props) => (props.left ? "0 10px 0 5px" : "0 5px 0 10px")};
+  svg path {
+    transition: all ease-out 0.35s;
+  }
+  :hover svg path {
+    stroke: #5e81fe;
+  }
+`;
+
 const Content = styled.div`
-  border: 1px solid black;
-  max-width: 1154px;
+  /* border: 1px solid black; */
+  max-width: 1164px;
+  padding: 0 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,16 +66,6 @@ const Slider = styled.div`
   max-width: 958px;
   min-height: 394px;
   align-items: center;
-
-  /* svg {
-    cursor: pointer;
-    :first-child {
-      margin-right: calc(7px + 5vw);
-    }
-    :last-child {
-      margin-left: calc(7px + 5vw);
-    }
-  } */
 `;
 
 const SliderLeft = styled.div`
@@ -47,8 +73,23 @@ const SliderLeft = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 12px;
+  margin-left: 2.5vw;
 
   div {
+    position: relative;
+    background: linear-gradient(
+      13.46deg,
+      rgba(255, 199, 53, 0.44) 1.89%,
+      rgba(255, 227, 154, 0.93) 1.9%,
+      rgba(255, 159, 90, 0) 68.24%
+    );
+    :hover img {
+      filter: opacity(100%);
+    }
+    :hover i {
+      opacity: 1;
+    }
+    cursor: pointer;
     :first-child {
       width: 267px;
       height: 267px;
@@ -59,13 +100,31 @@ const SliderLeft = styled.div`
       height: 126.58px;
     }
     img {
+      transition: all ease-out 0.95s;
+      filter: opacity(30%);
       display: block;
+      border-radius: 5px;
       width: 100%;
       height: 100%;
     }
   }
-  border-right: 1px solid blue;
+  /* border-right: 1px solid blue; */
 `;
+
+const Lupa = styled.i`
+  transition: opacity ease-out 0.55s;
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
+  top: ${(props) => (props.first ? "38%" : "28%")};
+  transform: translateY(-50%);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: ${(props) => (props.first ? "24px" : "15px")};
+  border-radius: 100%;
+`;
+
 const SliderRight = styled.div`
   flex: 1 1 50%;
   display: flex;
@@ -91,6 +150,24 @@ const Options = styled.div`
 const Blog = () => {
   return (
     <Wrapper>
+      <Arrow left>
+        <svg
+          width="27"
+          height="19"
+          viewBox="0 0 27 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M25 9.5L2 9.5M2 9.5L9.81132 17M2 9.5L9.81132 2"
+            stroke="#A8B4E5"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </Arrow>
+
       <Content>
         <TitleText fontSizeh1="24px" lineHeighth1="30px">
           <h4>OUR RESOURCES</h4>
@@ -100,12 +177,15 @@ const Blog = () => {
           <SliderLeft>
             <div>
               <img src={Blog0101} alt="1" />
+              <Lupa first>{lupa}</Lupa>
             </div>
             <div>
               <img src={Blog0102} alt="2" />
+              <Lupa>{lupa}</Lupa>
             </div>
             <div>
               <img src={Blog0103} alt="3" />
+              <Lupa>{lupa}</Lupa>
             </div>
           </SliderLeft>
           <SliderRight>
@@ -140,44 +220,25 @@ const Blog = () => {
         </Slider>
         <Options></Options>
       </Content>
+      <Arrow>
+        <svg
+          width="27"
+          height="19"
+          viewBox="0 0 27 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2 9.5H25M25 9.5L17.1887 2M25 9.5L17.1887 17"
+            stroke="#A8B4E5"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </Arrow>
     </Wrapper>
   );
 };
 
 export default Blog;
-
-{
-  /* <svg
-            width="27"
-            height="19"
-            viewBox="0 0 27 19"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M25 9.5L2 9.5M2 9.5L9.81132 17M2 9.5L9.81132 2"
-              stroke="#A8B4E5"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg> */
-}
-
-{
-  /* <svg
-            width="27"
-            height="19"
-            viewBox="0 0 27 19"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M2 9.5H25M25 9.5L17.1887 2M25 9.5L17.1887 17"
-              stroke="#A8B4E5"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg> */
-}
