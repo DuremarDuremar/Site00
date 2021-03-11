@@ -7,15 +7,17 @@ import FonImage from "../img/clouds.png";
 const Wrapper = styled.div`
   max-width: 100%;
   height: 894px;
-`;
-const Content = styled.div`
-  max-width: 1200px;
-  height: 573px;
   background-image: url(${FonImage});
   background-repeat: no-repeat;
   background-size: contain;
-  margin: 0px auto;
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const Content = styled.div`
+  max-width: 1200px;
+  height: ${(props) => (props.res900 ? "573px" : "800px")};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,17 +25,21 @@ const Content = styled.div`
 const Items = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: space-between;
   justify-content: space-between;
+
   span {
+    display: ${(props) => (props.res900 ? "inline" : "none")};
     width: 28px;
     height: 1px;
     background-color: #dae4fe;
     margin: 0 19px;
+    align-self: center;
   }
 `;
 const Item = styled.div`
-  /* flex: 0 0 25%; */
+  margin-bottom: ${(props) => (props.res900 ? "0" : "30px")};
+  flex: ${(props) => (props.res900 ? "1 1 auto" : "1 1 50%")};
   div {
     width: 69px;
     height: 69px;
@@ -68,15 +74,23 @@ const WrapperButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   span {
     width: 15px;
     height: 1px;
     background-color: #dae4fe;
-    margin: 0 16px;
+    margin: 0 1.1vw;
+  }
+  h5 {
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 19px;
+    color: #adb3cb;
   }
 `;
 
-const Features = () => {
+const Features = ({ res900 }) => {
   return (
     <Wrapper>
       <Content>
@@ -84,8 +98,8 @@ const Features = () => {
           <h4>ABOUT US</h4>
           <h1>Read about our app</h1>
         </TitleText>
-        <Items>
-          <Item>
+        <Items res900={res900}>
+          <Item res900={res900}>
             <div>
               <svg
                 width="18"
@@ -107,7 +121,7 @@ const Features = () => {
             </p>
           </Item>
           <span></span>
-          <Item>
+          <Item res900={res900}>
             <div>
               <svg
                 width="28"
@@ -130,7 +144,7 @@ const Features = () => {
             </p>
           </Item>
           <span></span>
-          <Item>
+          <Item res900={res900}>
             <div>
               <svg
                 width="22"
@@ -150,7 +164,7 @@ const Features = () => {
             <p>Vim ne tacimates neglegentur. Erat diceret omittam at est.</p>
           </Item>
           <span></span>
-          <Item>
+          <Item res900={res900}>
             <div>
               <svg
                 width="21"
