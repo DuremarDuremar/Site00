@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import TitleText from "../components/TitleText";
+import Button from "../components/Button";
 import FonImage from "../img/clouds.png";
 
 const Wrapper = styled.div`
@@ -15,12 +16,65 @@ const Content = styled.div`
   background-size: contain;
   margin: 0px auto;
   border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 const Items = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  span {
+    width: 28px;
+    height: 1px;
+    background-color: #dae4fe;
+    margin: 0 19px;
+  }
 `;
-const Item = styled.div``;
-const WrapperButton = styled.div``;
+const Item = styled.div`
+  /* flex: 0 0 25%; */
+  div {
+    width: 69px;
+    height: 69px;
+    background: #f1f5ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    margin: 0px auto;
+  }
+  h3 {
+    margin: 33px 0 25px;
+    font-family: "Open Sans";
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+    color: #4074f8;
+  }
+  p {
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 19px;
+    text-align: center;
+    color: #adb3cb;
+    max-width: 140px;
+    margin: 0px auto;
+  }
+`;
+const WrapperButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    width: 15px;
+    height: 1px;
+    background-color: #dae4fe;
+    margin: 0 16px;
+  }
+`;
 
 const Features = () => {
   return (
@@ -43,7 +97,7 @@ const Features = () => {
                 <path
                   d="M2 7.87273V19H6.42105L9 17L11.5789 19H16V7.87273L9 2L2 7.87273Z"
                   stroke="#4074F8"
-                  stroke-width="2.5"
+                  strokeWidth="2.5"
                 />
               </svg>
             </div>
@@ -52,6 +106,7 @@ const Features = () => {
               Brute laoreet efficiendi id his, ea illum nonumes luptatum pro.
             </p>
           </Item>
+          <span></span>
           <Item>
             <div>
               <svg
@@ -64,7 +119,7 @@ const Features = () => {
                 <path
                   d="M19.7544 16H12.0877H9.19945H2V5.94956V2H12.0877L13.7018 5.16129H19.7544V6.96774M19.7544 16L25 6.96774H19.7544M19.7544 16V6.96774"
                   stroke="#4074F8"
-                  stroke-width="2.5"
+                  strokeWidth="2.5"
                 />
               </svg>
             </div>
@@ -74,6 +129,7 @@ const Features = () => {
               conceptam ex has.
             </p>
           </Item>
+          <span></span>
           <Item>
             <div>
               <svg
@@ -86,13 +142,14 @@ const Features = () => {
                 <path
                   d="M2 2V6.94956V13.5H4.28115L5.5 17L9 13.5H13.7018H19.7544V7.96774V2H17H12.5H2Z"
                   stroke="#4074F8"
-                  stroke-width="2.5"
+                  strokeWidth="2.5"
                 />
               </svg>
             </div>
             <h3>Meeting chats</h3>
             <p>Vim ne tacimates neglegentur. Erat diceret omittam at est.</p>
           </Item>
+          <span></span>
           <Item>
             <div>
               <svg
@@ -105,7 +162,7 @@ const Features = () => {
                 <path
                   d="M2 11.9677V17.5H4.28115H9H13.7018H19.2544V11.9677M6.75439 5L10.7544 2M14.7544 5L10.7544 2M10.7544 2V12.5"
                   stroke="#4074F8"
-                  stroke-width="2.5"
+                  strokeWidth="2.5"
                 />
               </svg>
             </div>
@@ -113,7 +170,17 @@ const Features = () => {
             <p>Nisl idque mel ea, nominati voluptatum.</p>
           </Item>
         </Items>
-        <WrapperButton></WrapperButton>
+        <WrapperButton>
+          <Button background="#FFD7D7" color="#D43F3F">
+            <p>Read more</p>
+          </Button>
+          <span></span>
+          <h5>OR</h5>
+          <span></span>
+          <Button>
+            <p>Get started</p>
+          </Button>
+        </WrapperButton>
       </Content>
     </Wrapper>
   );
