@@ -4,7 +4,6 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   max-width: 100%;
   display: flex;
-  margin-bottom: 50px;
 `;
 const Content = styled.div`
   flex: 1 1 50%;

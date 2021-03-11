@@ -139,6 +139,15 @@ const Costumers = ({ res450, res900 }) => {
     }
   }, [svgUse2, setArrayReverse]);
 
+  // возвращаем порядок при смене разрешения
+  useEffect(() => {
+    if (res900) {
+      setArrayReverse(false);
+      setSvgUse1(0);
+      setSvgUse2(1);
+    }
+  }, [res900, setArrayReverse, setSvgUse1, setSvgUse2]);
+
   const svgs = [svg01, svg02, svg03, svg04, svg05].map((item, index) => {
     if (!res900 && res450) {
       return index === svgUse1 || index === svgUse2 ? (

@@ -27,11 +27,11 @@ const StyledTitleText = styled.div`
     max-width: ${(props) => props.maxWidthP || "502px"};
     font-family: Roboto;
     font-weight: normal;
-    font-size: 15px;
-    line-height: 29px;
+    font-size: ${(props) => props.fontSizeP || "15px"};
+    line-height: ${(props) => props.lineHeightP || "29px"};
     text-align: ${(props) => props.textAlignP || "center"};
     letter-spacing: 0.03em;
-    color: #8d96bd;
+    color: ${(props) => props.colorP || "#8d96bd"};
     margin: 0px auto;
   }
 `;

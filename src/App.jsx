@@ -7,7 +7,7 @@ import Costumers from "./bloks/Costumers.jsx";
 import Plan from "./bloks/Plan.jsx";
 import Features from "./bloks/Features.jsx";
 import Stats from "./bloks/Stats.jsx";
-// import Blog from "./bloks/Blog.jsx";
+import Blog from "./bloks/Blog.jsx";
 // import Quotes from "./bloks/Quotes.jsx";
 // import Started from "./bloks/Started.jsx";
 // import Faq from "./bloks/Faq.jsx";
@@ -70,6 +70,7 @@ const App = () => {
         <Plan res1350={res1350} res900={res900} />
         <Features res900={res900} />
         <Stats />
+        <Blog />
       </All>
     </>
   );
