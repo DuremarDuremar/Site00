@@ -32,7 +32,8 @@ const StyledTitleText = styled.div`
     text-align: ${(props) => props.textAlignP || "center"};
     letter-spacing: 0.03em;
     color: ${(props) => props.colorP || "#8d96bd"};
-    margin: 0px auto;
+    margin: ${(props) => props.marginP || "0px auto"};
+    /* margin: 0px auto; */
   }
 `;
 
