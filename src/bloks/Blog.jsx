@@ -31,7 +31,7 @@ const lupa = (
 
 const Wrapper = styled.div`
   max-width: 100%;
-  height: 865px;
+  min-height: 865px;
   background: #f5f8ff;
   display: flex;
   align-items: center;
@@ -60,12 +60,14 @@ const Content = styled.div`
 `;
 
 const Slider = styled.div`
+  padding: 10px 0;
   margin-top: 84px;
   background-color: #fff;
   display: flex;
   max-width: 958px;
-  min-height: 394px;
+  min-height: 404px;
   align-items: center;
+  flex-direction: ${(props) => (props.res900 ? "row" : "column")};
 `;
 
 const SliderLeft = styled.div`
@@ -73,7 +75,7 @@ const SliderLeft = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 12px;
-  margin-left: 2.5vw;
+  margin-left: ${(props) => (props.res900 ? "2.5vw" : "0")};
 
   div {
     position: relative;
@@ -90,7 +92,11 @@ const SliderLeft = styled.div`
       opacity: 1;
     }
     cursor: pointer;
-    :first-child {
+
+    ${(props) =>
+      props.res900 &&
+      `
+      :first-child {
       width: 267px;
       height: 267px;
       grid-row: span 2 / auto;
@@ -99,6 +105,21 @@ const SliderLeft = styled.div`
       width: 127px;
       height: 126.58px;
     }
+  `}
+
+    ${(props) =>
+      !props.res900 &&
+      `
+      width: 190px;
+      height: 190px;
+      :last-child {
+      width: 388px;
+      height: 240px;
+      grid-column: span 2 / auto;
+    }
+  `}
+
+
     img {
       transition: all ease-out 0.95s;
       filter: opacity(30%);
@@ -116,12 +137,14 @@ const Lupa = styled.i`
   position: absolute;
   opacity: 0;
   z-index: 1;
-  top: ${(props) => (props.first ? "38%" : "28%")};
+  top: ${(props) => (props.first && props.res900 ? "38%" : "28%")};
+  top: ${(props) => (props.last && !props.res900 ? "33%" : "30%")};
   transform: translateY(-50%);
   left: 50%;
   transform: translateX(-50%);
   background-color: #fff;
-  padding: ${(props) => (props.first ? "24px" : "15px")};
+  padding: ${(props) => (props.first && props.res900 ? "24px" : "15px")};
+  padding: ${(props) => (props.last && !props.res900 ? "24px" : "15px")};
   border-radius: 100%;
 `;
 
@@ -130,6 +153,7 @@ const SliderRight = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 8px;
 `;
 
 const Buttons = styled.div`
@@ -141,13 +165,21 @@ const Buttons = styled.div`
     }
   }
 `;
-const Options = styled.div`
+const Circles = styled.div`
   width: 48px;
   height: 8px;
-  background-color: pink;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8.5vw;
+  div {
+    width: 8px;
+    height: 8px;
+    background-color: #d1d6e3;
+    border-radius: 100%;
+  }
 `;
 
-const Blog = () => {
+const Blog = ({ res900 }) => {
   return (
     <Wrapper>
       <Arrow left>
@@ -173,32 +205,37 @@ const Blog = () => {
           <h4>OUR RESOURCES</h4>
           <h1>Start reading our blog</h1>
         </TitleText>
-        <Slider>
-          <SliderLeft>
+        <Slider res900={res900}>
+          <SliderLeft res900={res900}>
             <div>
               <img src={Blog0101} alt="1" />
-              <Lupa first>{lupa}</Lupa>
+              <Lupa first res900={res900}>
+                {lupa}
+              </Lupa>
             </div>
             <div>
               <img src={Blog0102} alt="2" />
-              <Lupa>{lupa}</Lupa>
+              <Lupa res900={res900}>{lupa}</Lupa>
             </div>
             <div>
               <img src={Blog0103} alt="3" />
-              <Lupa>{lupa}</Lupa>
+              <Lupa last res900={res900}>
+                {lupa}
+              </Lupa>
             </div>
           </SliderLeft>
-          <SliderRight>
+          <SliderRight res900={res900}>
             <TitleText
               fontWeighth1="400"
               paddingToph1="0"
-              paddingTopP="32px"
+              paddingTopP="2.4vw"
               fontSizeP="14px"
               lineHeightP="27px"
               maxWidthP="408px"
               textAlignh1="left"
               textAlignP="left"
               marginP="0"
+              fontSizeh1="calc(23px + 1vw)"
             >
               <h1>How to start planning</h1>
               <p>
@@ -218,7 +255,11 @@ const Blog = () => {
             </Buttons>
           </SliderRight>
         </Slider>
-        <Options></Options>
+        <Circles>
+          <div></div>
+          <div></div>
+          <div></div>
+        </Circles>
       </Content>
       <Arrow>
         <svg
