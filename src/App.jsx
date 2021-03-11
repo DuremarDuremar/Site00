@@ -70,7 +70,7 @@ const App = () => {
         <Plan res1350={res1350} res900={res900} />
         <Features res900={res900} />
         <Stats />
-        <Blog res900={res900} />
+        <Blog res900={res900} res600={res600} />
       </All>
     </>
   );

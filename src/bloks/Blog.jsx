@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import logo from "../img/logo.jpg";
 import Blog0101 from "../img/blog1.jpg";
 import Blog0102 from "../img/blog2.jpg";
 import Blog0103 from "../img/blog3.jpg";
@@ -29,6 +30,42 @@ const lupa = (
   </svg>
 );
 
+const left = (
+  <svg
+    width="27"
+    height="19"
+    viewBox="0 0 27 19"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M25 9.5L2 9.5M2 9.5L9.81132 17M2 9.5L9.81132 2"
+      stroke="#A8B4E5"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const right = (
+  <svg
+    width="27"
+    height="19"
+    viewBox="0 0 27 19"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M2 9.5H25M25 9.5L17.1887 2M25 9.5L17.1887 17"
+      stroke="#A8B4E5"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const Wrapper = styled.div`
   max-width: 100%;
   min-height: 865px;
@@ -36,6 +73,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
 const Arrow = styled.div`
@@ -52,7 +90,7 @@ const Arrow = styled.div`
 const Content = styled.div`
   /* border: 1px solid black; */
   max-width: 1164px;
-  padding: 0 10px;
+  padding: ${(props) => (props.res900 ? "0 10px" : "60px 10px 0")};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,7 +99,7 @@ const Content = styled.div`
 
 const Slider = styled.div`
   padding: 10px 0;
-  margin-top: 84px;
+  margin-top: calc(20px + 5vw);
   background-color: #fff;
   display: flex;
   max-width: 958px;
@@ -73,7 +111,8 @@ const Slider = styled.div`
 const SliderLeft = styled.div`
   flex: 1 1 50%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: ${(props) =>
+    props.res600 ? "repeat(2, 1fr)" : "repeat(1, 1fr)"};
   grid-gap: 12px;
   margin-left: ${(props) => (props.res900 ? "2.5vw" : "0")};
 
@@ -109,6 +148,7 @@ const SliderLeft = styled.div`
 
     ${(props) =>
       !props.res900 &&
+      props.res600 &&
       `
       width: 190px;
       height: 190px;
@@ -118,7 +158,13 @@ const SliderLeft = styled.div`
       grid-column: span 2 / auto;
     }
   `}
-
+${(props) =>
+      !props.res600 &&
+      `
+      width: calc(160px + 25vw);
+      height: calc(160px + 25vw);
+    
+  `}
 
     img {
       transition: all ease-out 0.95s;
@@ -138,13 +184,16 @@ const Lupa = styled.i`
   opacity: 0;
   z-index: 1;
   top: ${(props) => (props.first && props.res900 ? "38%" : "28%")};
-  top: ${(props) => (props.last && !props.res900 ? "33%" : "30%")};
+  top: ${(props) =>
+    props.last && !props.res900 && props.res600 ? "33%" : "30%"};
+  top: ${(props) => !props.res600 && "40%"};
   transform: translateY(-50%);
   left: 50%;
   transform: translateX(-50%);
   background-color: #fff;
   padding: ${(props) => (props.first && props.res900 ? "24px" : "15px")};
-  padding: ${(props) => (props.last && !props.res900 ? "24px" : "15px")};
+  padding: ${(props) =>
+    props.last && !props.res900 && props.res600 ? "24px" : "15px"};
   border-radius: 100%;
 `;
 
@@ -159,9 +208,16 @@ const SliderRight = styled.div`
 const Buttons = styled.div`
   margin-top: 31px;
 
+  ${(props) =>
+    !props.res600 &&
+    `
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+  `}
   button {
     :last-child {
-      margin-left: 8px;
+      margin: ${(props) => (props.res600 ? "0 0 0 8px" : "8px 0 0 0")};
     }
   }
 `;
@@ -179,60 +235,98 @@ const Circles = styled.div`
   }
 `;
 
-const Blog = ({ res900 }) => {
+const Arrows600 = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  width: 200px;
+  img {
+    display: block;
+    max-width: 50px;
+    height: 45px;
+    border: 4px solid #332e2ee9;
+    border-radius: 15px;
+  }
+`;
+const Modal = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+  opacity: 0.8;
+  z-index: 3;
+`;
+const ModalImages = styled.div`
+  position: absolute;
+  opacity: 1;
+  z-index: 4;
+`;
+
+const Blog = ({ res900, res600 }) => {
+  const [modal, setModal] = useState(false);
+  const [animals, setAnimals] = useState(null);
+
   return (
     <Wrapper>
-      <Arrow left>
-        <svg
-          width="27"
-          height="19"
-          viewBox="0 0 27 19"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M25 9.5L2 9.5M2 9.5L9.81132 17M2 9.5L9.81132 2"
-            stroke="#A8B4E5"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </Arrow>
+      {res600 && <Arrow left>{left}</Arrow>}
 
-      <Content>
+      <Content res900={res900}>
         <TitleText fontSizeh1="24px" lineHeighth1="30px">
           <h4>OUR RESOURCES</h4>
           <h1>Start reading our blog</h1>
         </TitleText>
+        {!res600 && (
+          <Arrows600>
+            <Arrow left>{left}</Arrow> <img src={logo} alt="logo" />{" "}
+            <Arrow>{right}</Arrow>
+          </Arrows600>
+        )}
         <Slider res900={res900}>
-          <SliderLeft res900={res900}>
-            <div>
+          <SliderLeft res900={res900} res600={res600}>
+            <div
+              onClick={() => {
+                setModal(true);
+                setAnimals(Blog0101);
+              }}
+            >
               <img src={Blog0101} alt="1" />
-              <Lupa first res900={res900}>
+              <Lupa first res900={res900} res600={res600}>
                 {lupa}
               </Lupa>
             </div>
-            <div>
+            <div
+              onClick={() => {
+                setModal(true);
+                setAnimals(Blog0102);
+              }}
+            >
               <img src={Blog0102} alt="2" />
-              <Lupa res900={res900}>{lupa}</Lupa>
+              <Lupa res900={res900} res600={res600}>
+                {lupa}
+              </Lupa>
             </div>
-            <div>
+            <div
+              onClick={() => {
+                setModal(true);
+                setAnimals(Blog0103);
+              }}
+            >
               <img src={Blog0103} alt="3" />
-              <Lupa last res900={res900}>
+              <Lupa last res900={res900} res600={res600}>
                 {lupa}
               </Lupa>
             </div>
           </SliderLeft>
-          <SliderRight res900={res900}>
+          <SliderRight>
             <TitleText
               fontWeighth1="400"
-              paddingToph1="0"
+              paddingToph1={res900 ? "0" : "20px"}
               paddingTopP="2.4vw"
               fontSizeP="14px"
               lineHeightP="27px"
               maxWidthP="408px"
-              textAlignh1="left"
+              textAlignh1={res900 ? "left" : "center"}
               textAlignP="left"
               marginP="0"
               fontSizeh1="calc(23px + 1vw)"
@@ -245,7 +339,7 @@ const Blog = ({ res900 }) => {
                 periculis vis ei, quas tibique pro at, eos ut decore ...
               </p>
             </TitleText>
-            <Buttons>
+            <Buttons res600={res600}>
               <Button>
                 <p>Read now</p>
               </Button>
@@ -261,23 +355,15 @@ const Blog = ({ res900 }) => {
           <div></div>
         </Circles>
       </Content>
-      <Arrow>
-        <svg
-          width="27"
-          height="19"
-          viewBox="0 0 27 19"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M2 9.5H25M25 9.5L17.1887 2M25 9.5L17.1887 17"
-            stroke="#A8B4E5"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </Arrow>
+      {res600 && <Arrow>{right}</Arrow>}
+      {modal && (
+        <>
+          <Modal onClick={() => setModal(false)}></Modal>
+          <ModalImages>
+            <img src={animals} alt="#" />
+          </ModalImages>
+        </>
+      )}
     </Wrapper>
   );
 };
