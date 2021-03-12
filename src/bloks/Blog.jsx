@@ -281,12 +281,13 @@ const Circles = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 8.5vw;
-  div {
-    width: 8px;
-    height: 8px;
-    background-color: #d1d6e3;
-    border-radius: 100%;
-  }
+`;
+const ItemCircles = styled.div`
+  width: 8px;
+  height: 8px;
+  background-color: ${(props) => (props.activ ? "blue" : "#d1d6e3")};
+  border-radius: 100%;
+  cursor: pointer;
 `;
 
 const Arrows600 = styled.div`
@@ -344,7 +345,7 @@ const Blog = ({ res900, res600 }) => {
   const [modal, setModal] = useState(false);
   const [animals, setAnimals] = useState(null);
   const [animals2, setAnimals2] = useState([Blog0104, Blog0105]);
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
 
   const sliderLeft = (
     <SliderLeft res900={res900} res600={res600}>
@@ -417,7 +418,61 @@ const Blog = ({ res900, res600 }) => {
     </SliderRight>
   );
 
-  // слайдер
+  const sliderLeft2 = (
+    <SliderLeft2
+      res900={res900}
+      res600={res600}
+      first={animals2[0] === Blog0104 ? "true" : "false"}
+    >
+      <div onClick={() => setAnimals2([...animals2].reverse())}>
+        <img src={animals2[0]} alt="4" />
+      </div>
+      <div onClick={() => setAnimals2([...animals2].reverse())}>
+        <img src={animals2[1]} alt="5" />
+      </div>
+    </SliderLeft2>
+  );
+
+  const circles = () => {
+    const arrow = [1, 2, 3].map((item, index) => {
+      return page === index + 1 ? (
+        <ItemCircles
+          key={index}
+          activ
+          onClick={() => setPage(index + 1)}
+        ></ItemCircles>
+      ) : (
+        <ItemCircles
+          key={index}
+          onClick={() => setPage(index + 1)}
+        ></ItemCircles>
+      );
+    });
+    return <Circles>{arrow}</Circles>;
+  };
+
+  const arrow = (n) => {
+    if (n === left) {
+      return (
+        <Arrow left onClick={() => sliderPage("past")}>
+          {left}
+        </Arrow>
+      );
+    } else {
+      return <Arrow onClick={() => sliderPage("next")}>{right}</Arrow>;
+    }
+  };
+
+  // слайдер страниц
+  const sliderPage = (n) => {
+    if (n === "next") {
+      page < 3 ? setPage(page + 1) : setPage(1);
+    } else {
+      page > 1 ? setPage(page - 1) : setPage(3);
+    }
+  };
+
+  // слайдер картинок
   const slider = (n) => {
     const links = [Blog0101, Blog0102, Blog0103];
     const array = links.sort().filter((item) => {
@@ -434,7 +489,7 @@ const Blog = ({ res900, res600 }) => {
 
   return (
     <Wrapper>
-      {res600 && !modal && <Arrow left>{left}</Arrow>}
+      {res600 && !modal && arrow(left)}
 
       <Content res900={res900}>
         <TitleText fontSizeh1="24px" lineHeighth1="30px">
@@ -443,8 +498,9 @@ const Blog = ({ res900, res600 }) => {
         </TitleText>
         {!res600 && (
           <Arrows600>
-            <Arrow left>{left}</Arrow> <img src={logo} alt="logo" />
-            <Arrow>{right}</Arrow>
+            {arrow(left)}
+            <img src={logo} alt="logo" />
+            {arrow(right)}
           </Arrows600>
         )}
         <Slider res900={res900}>
@@ -457,28 +513,18 @@ const Blog = ({ res900, res600 }) => {
           {page === 2 && (
             <>
               {sliderRight}
-              <SliderLeft2
-                res900={res900}
-                res600={res600}
-                first={animals2[0] === Blog0104 ? "true" : "false"}
-              >
-                <div onClick={() => setAnimals2([...animals2].reverse())}>
-                  <img src={animals2[0]} alt="4" />
-                </div>
-                <div onClick={() => setAnimals2([...animals2].reverse())}>
-                  <img src={animals2[1]} alt="5" />
-                </div>
-              </SliderLeft2>
+              {sliderLeft2}
             </>
           )}
+          {page === 3 && (
+            <SliderRightLeft>
+              <p>Hello World</p>
+            </SliderRightLeft>
+          )}
         </Slider>
-        <Circles>
-          <div></div>
-          <div></div>
-          <div></div>
-        </Circles>
+        {circles()}
       </Content>
-      {res600 && !modal && <Arrow>{right}</Arrow>}
+      {res600 && !modal && arrow(right)}
       {modal && (
         <>
           <Modal onClick={() => setModal(false)}></Modal>
