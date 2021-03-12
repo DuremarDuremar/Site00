@@ -265,20 +265,45 @@ const Modal = styled.div`
 const ModalImages = styled.div`
   position: absolute;
   z-index: 4;
+  display: flex;
+  align-items: center;
 
   img {
-    border: 8px solid rgba(255, 199, 53, 0.44);
+    border: 9px solid rgba(255, 199, 53, 0.44);
 
     border-radius: 40%;
     display: block;
     width: calc(30vw + 200px);
     height: calc(30vw + 200px);
   }
+
+  i {
+    cursor: pointer;
+    color: rgba(255, 199, 53, 0.44);
+    :hover {
+      color: rgba(255, 199, 153, 0.44);
+    }
+  }
 `;
 
 const Blog = ({ res900, res600 }) => {
   const [modal, setModal] = useState(false);
   const [animals, setAnimals] = useState(null);
+
+  // слайдер
+  const slider = (n) => {
+    const links = [Blog0101, Blog0102, Blog0103];
+    const array = links.sort().filter((item) => {
+      return n === "next" ? item > animals : item < animals;
+    });
+    if (n === "next") {
+      array.length > 0 ? setAnimals(array[0]) : setAnimals(links[0]);
+    } else {
+      array.length > 0
+        ? setAnimals(array[array.length - 1])
+        : setAnimals(links[links.length - 1]);
+    }
+  };
 
   return (
     <Wrapper>
@@ -373,7 +398,15 @@ const Blog = ({ res900, res600 }) => {
         <>
           <Modal onClick={() => setModal(false)}></Modal>
           <ModalImages>
+            <i
+              className="fas fa-caret-left fa-6x"
+              onClick={() => slider("past")}
+            ></i>
             <img src={animals} alt="#" />
+            <i
+              className="fas fa-caret-right fa-6x"
+              onClick={() => slider("next")}
+            ></i>
           </ModalImages>
         </>
       )}
