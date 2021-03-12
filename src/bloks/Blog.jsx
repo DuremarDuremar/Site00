@@ -4,6 +4,8 @@ import logo from "../img/logo.jpg";
 import Blog0101 from "../img/blog1.jpg";
 import Blog0102 from "../img/blog2.jpg";
 import Blog0103 from "../img/blog3.jpg";
+import Blog0104 from "../img/blog4.jpg";
+import Blog0105 from "../img/blog5.jpg";
 import TitleText from "../components/TitleText";
 import Button from "../components/Button";
 
@@ -178,6 +180,56 @@ ${(props) =>
   /* border-right: 1px solid blue; */
 `;
 
+const SliderLeft2 = styled.div`
+  flex: 1 1 50%;
+  position: relative;
+  margin-top: ${(props) => (props.res900 ? "0" : "3vw")};
+
+  div {
+    ${(props) =>
+      props.res600 &&
+      `
+      cursor:pointer;
+      :first-child {
+      width: 412px;
+      height: 412px;
+    }
+    :last-child {
+      width: 167px;
+      height: 167px;
+      position: absolute;
+      
+      right: 0.1vw;
+    }    
+  `}
+    :last-child {
+      bottom: ${(props) =>
+        props.first === "true" && props.res600 ? "0" : "60%"};
+      right: ${(props) =>
+        props.first === "true" && props.res600 ? "0.1vw" : "60%"};
+    }
+    ${(props) =>
+      !props.res600 &&
+      `
+      pointer-events: none;
+      width: 74vw;
+      height: 74vw;
+      :last-child{
+        margin-top: 3vw;
+      }
+    
+      
+  `}
+
+    img {
+      display: block;
+      border-radius: 5px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+`;
+
 const Lupa = styled.i`
   transition: opacity ease-out 0.55s;
   position: absolute;
@@ -204,6 +256,8 @@ const SliderRight = styled.div`
   align-items: center;
   padding: 0 8px;
 `;
+
+const SliderRightLeft = styled.div``;
 
 const Buttons = styled.div`
   margin-top: 31px;
@@ -289,6 +343,79 @@ const ModalImages = styled.div`
 const Blog = ({ res900, res600 }) => {
   const [modal, setModal] = useState(false);
   const [animals, setAnimals] = useState(null);
+  const [animals2, setAnimals2] = useState([Blog0104, Blog0105]);
+  const [page, setPage] = useState(2);
+
+  const sliderLeft = (
+    <SliderLeft res900={res900} res600={res600}>
+      <div
+        onClick={() => {
+          setModal(true);
+          setAnimals(Blog0101);
+        }}
+      >
+        <img src={Blog0101} alt="1" />
+        <Lupa first res900={res900} res600={res600}>
+          {lupa}
+        </Lupa>
+      </div>
+      <div
+        onClick={() => {
+          setModal(true);
+          setAnimals(Blog0102);
+        }}
+      >
+        <img src={Blog0102} alt="2" />
+        <Lupa res900={res900} res600={res600}>
+          {lupa}
+        </Lupa>
+      </div>
+      <div
+        onClick={() => {
+          setModal(true);
+          setAnimals(Blog0103);
+        }}
+      >
+        <img src={Blog0103} alt="3" />
+        <Lupa last res900={res900} res600={res600}>
+          {lupa}
+        </Lupa>
+      </div>
+    </SliderLeft>
+  );
+
+  const sliderRight = (
+    <SliderRight>
+      <TitleText
+        fontWeighth1="400"
+        paddingToph1={res900 ? "0" : "20px"}
+        paddingTopP="2.4vw"
+        fontSizeP="14px"
+        lineHeightP="27px"
+        maxWidthP="408px"
+        textAlignh1={res900 ? "left" : "center"}
+        textAlignP="left"
+        marginP="0"
+        fontSizeh1="calc(23px + 1vw)"
+      >
+        <h1>How to start planning</h1>
+        <p>
+          Quidam vocibus eum ne, erat consectetuer voluptatibus ut nam. Eu usu
+          vidit tractatos, vero tractatos ius an, in mel diceret persecuti.
+          Natum petentium principes mei ea. Tota everti periculis vis ei, quas
+          tibique pro at, eos ut decore ...
+        </p>
+      </TitleText>
+      <Buttons res600={res600}>
+        <Button>
+          <p>Read now</p>
+        </Button>
+        <Button width="211px" background="#fff" color="#A6B6DA">
+          <p>Add to your bookmarks</p>
+        </Button>
+      </Buttons>
+    </SliderRight>
+  );
 
   // слайдер
   const slider = (n) => {
@@ -307,7 +434,7 @@ const Blog = ({ res900, res600 }) => {
 
   return (
     <Wrapper>
-      {res600 && <Arrow left>{left}</Arrow>}
+      {res600 && !modal && <Arrow left>{left}</Arrow>}
 
       <Content res900={res900}>
         <TitleText fontSizeh1="24px" lineHeighth1="30px">
@@ -316,76 +443,34 @@ const Blog = ({ res900, res600 }) => {
         </TitleText>
         {!res600 && (
           <Arrows600>
-            <Arrow left>{left}</Arrow> <img src={logo} alt="logo" />{" "}
+            <Arrow left>{left}</Arrow> <img src={logo} alt="logo" />
             <Arrow>{right}</Arrow>
           </Arrows600>
         )}
         <Slider res900={res900}>
-          <SliderLeft res900={res900} res600={res600}>
-            <div
-              onClick={() => {
-                setModal(true);
-                setAnimals(Blog0101);
-              }}
-            >
-              <img src={Blog0101} alt="1" />
-              <Lupa first res900={res900} res600={res600}>
-                {lupa}
-              </Lupa>
-            </div>
-            <div
-              onClick={() => {
-                setModal(true);
-                setAnimals(Blog0102);
-              }}
-            >
-              <img src={Blog0102} alt="2" />
-              <Lupa res900={res900} res600={res600}>
-                {lupa}
-              </Lupa>
-            </div>
-            <div
-              onClick={() => {
-                setModal(true);
-                setAnimals(Blog0103);
-              }}
-            >
-              <img src={Blog0103} alt="3" />
-              <Lupa last res900={res900} res600={res600}>
-                {lupa}
-              </Lupa>
-            </div>
-          </SliderLeft>
-          <SliderRight>
-            <TitleText
-              fontWeighth1="400"
-              paddingToph1={res900 ? "0" : "20px"}
-              paddingTopP="2.4vw"
-              fontSizeP="14px"
-              lineHeightP="27px"
-              maxWidthP="408px"
-              textAlignh1={res900 ? "left" : "center"}
-              textAlignP="left"
-              marginP="0"
-              fontSizeh1="calc(23px + 1vw)"
-            >
-              <h1>How to start planning</h1>
-              <p>
-                Quidam vocibus eum ne, erat consectetuer voluptatibus ut nam. Eu
-                usu vidit tractatos, vero tractatos ius an, in mel diceret
-                persecuti. Natum petentium principes mei ea. Tota everti
-                periculis vis ei, quas tibique pro at, eos ut decore ...
-              </p>
-            </TitleText>
-            <Buttons res600={res600}>
-              <Button>
-                <p>Read now</p>
-              </Button>
-              <Button width="211px" background="#fff" color="#A6B6DA">
-                <p>Add to your bookmarks</p>
-              </Button>
-            </Buttons>
-          </SliderRight>
+          {page === 1 && (
+            <>
+              {sliderLeft}
+              {sliderRight}
+            </>
+          )}
+          {page === 2 && (
+            <>
+              {sliderRight}
+              <SliderLeft2
+                res900={res900}
+                res600={res600}
+                first={animals2[0] === Blog0104 ? "true" : "false"}
+              >
+                <div onClick={() => setAnimals2([...animals2].reverse())}>
+                  <img src={animals2[0]} alt="4" />
+                </div>
+                <div onClick={() => setAnimals2([...animals2].reverse())}>
+                  <img src={animals2[1]} alt="5" />
+                </div>
+              </SliderLeft2>
+            </>
+          )}
         </Slider>
         <Circles>
           <div></div>
@@ -393,7 +478,7 @@ const Blog = ({ res900, res600 }) => {
           <div></div>
         </Circles>
       </Content>
-      {res600 && <Arrow>{right}</Arrow>}
+      {res600 && !modal && <Arrow>{right}</Arrow>}
       {modal && (
         <>
           <Modal onClick={() => setModal(false)}></Modal>
