@@ -163,12 +163,12 @@ ${(props) =>
       `
       width: calc(160px + 25vw);
       height: calc(160px + 25vw);
-    
+      pointer-events: none;
   `}
 
     img {
+      filter: ${(props) => (props.res600 ? "opacity(30%)" : "opacity(100%)")};
       transition: all ease-out 0.95s;
-      filter: opacity(30%);
       display: block;
       border-radius: 5px;
       width: 100%;
@@ -253,14 +253,27 @@ const Modal = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: grey;
-  opacity: 0.8;
+  background: linear-gradient(
+    13.46deg,
+    rgba(255, 199, 53, 0.44) 1.89%,
+    rgba(255, 227, 154, 0.93) 1.9%,
+    rgba(255, 159, 90, 0) 100%
+  );
   z-index: 3;
+  cursor: pointer;
 `;
 const ModalImages = styled.div`
   position: absolute;
-  opacity: 1;
   z-index: 4;
+
+  img {
+    border: 8px solid rgba(255, 199, 53, 0.44);
+
+    border-radius: 40%;
+    display: block;
+    width: calc(30vw + 200px);
+    height: calc(30vw + 200px);
+  }
 `;
 
 const Blog = ({ res900, res600 }) => {
