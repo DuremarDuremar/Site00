@@ -71,7 +71,7 @@ const right = (
 
 const Wrapper = styled.div`
   max-width: 100%;
-  min-height: 865px;
+  min-height: ${(props) => (props.page !== 3 ? "865px" : "660px")};
   background: #f5f8ff;
   display: flex;
   align-items: center;
@@ -106,10 +106,10 @@ const Slider = styled.div`
   background-color: #fff;
   display: flex;
   max-width: 958px;
-  min-height: ${(props) => (props.page !== 3 ? "404px" : "200px")};
+  min-height: ${(props) => props.page !== 3 && "404px"};
   flex-direction: ${(props) =>
     props.res900 && props.page !== 3 ? "row" : "column"};
-  align-items: ${(props) => (props.page !== 3 ? "center" : "flex-end")};
+  align-items: center;
 `;
 
 const SliderLeft = styled.div`
@@ -488,7 +488,7 @@ const Blog = ({ res900, res600 }) => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper page={page}>
       {res600 && !modal && arrow(left)}
 
       <Content res900={res900}>

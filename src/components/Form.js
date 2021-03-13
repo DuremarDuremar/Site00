@@ -2,11 +2,12 @@ import React from "react";
 import Button from "./Button";
 import styled from "styled-components";
 
-const Form = styled.div`
+const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 10px;
+  padding: 20px 10px;
+  min-height: ${(props) => !props.res600 && "270px"};
 
   div {
     max-width: 300px;
@@ -28,16 +29,16 @@ const Form = styled.div`
       text-align: center;
     }
   }
-  form {
-    margin-top: 5vw;
-  }
 `;
-const FormWrapper = styled.form`
+const Form = styled.form`
   display: flex;
   height: 59px;
+  margin-top: 5vw;
+  display: ${(props) => (props.res600 ? "flex" : "block")};
 
   input {
-    width: 279px;
+    height: 59px;
+    width: ${(props) => (props.res600 ? "279px" : "calc(170px + 20vw)")};
     outline: none;
     border: none;
     background-color: #efeff7;
@@ -51,11 +52,14 @@ const FormWrapper = styled.form`
     border-radius: 5px;
     margin-right: 14px;
   }
+  button {
+    margin-top: ${(props) => !props.res600 && "12px"};
+  }
 `;
 
-const SliderForm = () => {
+const SliderForm = ({ res600 }) => {
   return (
-    <Form>
+    <FormWrapper res600={res600}>
       <div>
         <h4>Sign up for newsletter</h4>
         <p>
@@ -63,7 +67,7 @@ const SliderForm = () => {
           alterum.
         </p>
       </div>
-      <FormWrapper>
+      <Form res600={res600}>
         <input placeholder="Email address" />
         <Button
           height="59px"
@@ -75,8 +79,8 @@ const SliderForm = () => {
         >
           <p>Save me</p>
         </Button>
-      </FormWrapper>
-    </Form>
+      </Form>
+    </FormWrapper>
   );
 };
 
