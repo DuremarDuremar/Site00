@@ -8,6 +8,7 @@ import Blog0104 from "../img/blog4.jpg";
 import Blog0105 from "../img/blog5.jpg";
 import TitleText from "../components/TitleText";
 import Button from "../components/Button";
+import SliderForm from "../components/Form";
 
 const lupa = (
   <svg
@@ -105,9 +106,10 @@ const Slider = styled.div`
   background-color: #fff;
   display: flex;
   max-width: 958px;
-  min-height: 404px;
-  align-items: center;
-  flex-direction: ${(props) => (props.res900 ? "row" : "column")};
+  min-height: ${(props) => (props.page !== 3 ? "404px" : "200px")};
+  flex-direction: ${(props) =>
+    props.res900 && props.page !== 3 ? "row" : "column"};
+  align-items: ${(props) => (props.page !== 3 ? "center" : "flex-end")};
 `;
 
 const SliderLeft = styled.div`
@@ -257,8 +259,6 @@ const SliderRight = styled.div`
   padding: 0 8px;
 `;
 
-const SliderRightLeft = styled.div``;
-
 const Buttons = styled.div`
   margin-top: 31px;
 
@@ -285,7 +285,7 @@ const Circles = styled.div`
 const ItemCircles = styled.div`
   width: 8px;
   height: 8px;
-  background-color: ${(props) => (props.activ ? "blue" : "#d1d6e3")};
+  background-color: ${(props) => (props.activ ? "#5e81fe" : "#d1d6e3")};
   border-radius: 100%;
   cursor: pointer;
 `;
@@ -503,7 +503,7 @@ const Blog = ({ res900, res600 }) => {
             {arrow(right)}
           </Arrows600>
         )}
-        <Slider res900={res900}>
+        <Slider res900={res900} page={page}>
           {page === 1 && (
             <>
               {sliderLeft}
@@ -516,11 +516,7 @@ const Blog = ({ res900, res600 }) => {
               {sliderLeft2}
             </>
           )}
-          {page === 3 && (
-            <SliderRightLeft>
-              <p>Hello World</p>
-            </SliderRightLeft>
-          )}
+          {page === 3 && <SliderForm res600={res600} />}
         </Slider>
         {circles()}
       </Content>

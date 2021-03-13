@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 const StyledButton = styled.button`
   width: ${(props) => props.width || "113px"};
-  height: 43px;
+  height: ${(props) => props.height || "43px"};
   background: ${(props) => props.background || "#d2e1ff"};
-  border-radius: 2px;
+  border-radius: ${(props) => props.borderRadius || "2px"};
   outline: none;
   border: ${(props) => props.border || "none"};
   cursor: pointer;
