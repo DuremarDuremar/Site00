@@ -80,20 +80,27 @@ const Alert = styled.div`
     }
   }
 `;
+
+const Errors = styled.div`
+  font-size: 14px;
+  line-height: 27px;
+  letter-spacing: 0.03em;
+  color: #8d96bd;
+  text-align: center;
+  margin-top: 6px;
+  i {
+    color: red;
+  }
+`;
 const SliderForm = ({ res600, sub, setSub }) => {
   const [form, setForm] = useState("");
 
-  const { register, handleSubmit } = useForm();
-
-  // const Submit = (e) => {
-  //   e.preventDefault();
-  //   form !== "" && setSub(true);
-  // };
+  const { register, handleSubmit, errors } = useForm();
 
   const OnSubmit = (data) => {
-    data.letter !== "" && setSub(true);
-    setForm(data.letter);
-    console.log("data", data);
+    data.email !== "" && setSub(true);
+    setForm(data.email);
+    // console.log("data", data);
   };
 
   return (
@@ -108,11 +115,12 @@ const SliderForm = ({ res600, sub, setSub }) => {
 
       <Form res600={res600} onSubmit={handleSubmit(OnSubmit)}>
         <input
-          name="letter"
+          name="email"
           type="email"
           placeholder="Email address"
-          ref={register}
+          ref={register({ required: true, minLength: 10 })}
         />
+
         <Button
           height="59px"
           borderRadius="5px"
@@ -140,6 +148,11 @@ const SliderForm = ({ res600, sub, setSub }) => {
             <p>OK</p>
           </Button>
         </Alert>
+      )}
+      {errors.email && (
+        <Errors>
+          <i className="fas fa-exclamation-circle"></i> please enter email
+        </Errors>
       )}
     </FormWrapper>
   );
