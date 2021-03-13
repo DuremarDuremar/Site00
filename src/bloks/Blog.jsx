@@ -341,7 +341,7 @@ const ModalImages = styled.div`
   }
 `;
 
-const Blog = ({ res900, res600 }) => {
+const Blog = ({ res900, res600, sub, setSub }) => {
   const [modal, setModal] = useState(false);
   const [animals, setAnimals] = useState(null);
   const [animals2, setAnimals2] = useState([Blog0104, Blog0105]);
@@ -516,7 +516,9 @@ const Blog = ({ res900, res600 }) => {
               {sliderLeft2}
             </>
           )}
-          {page === 3 && <SliderForm res600={res600} />}
+          {page === 3 && (
+            <SliderForm res600={res600} sub={sub} setSub={setSub} />
+          )}
         </Slider>
         {circles()}
       </Content>

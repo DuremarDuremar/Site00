@@ -14,6 +14,11 @@ import Blog from "./bloks/Blog.jsx";
 // import NewsLetter from "./bloks/NewsLetter.jsx";
 
 const Global = createGlobalStyle`
+
+body{
+  overflow: ${(props) => (props.sub ? "hidden" : "auto")};
+}
+
 *{
   margin:0;
   padding:0;
@@ -28,7 +33,7 @@ li {
     list-style-type: none;
     cursor: pointer;
   }
-
+  
 `;
 
 const All = styled.div`
@@ -39,6 +44,7 @@ const All = styled.div`
 const App = () => {
   const [logoImg, setLogoImg] = useState(false);
   const [menuActiv, setMenuActiv] = useState(1);
+  const [sub, setSub] = useState(false);
 
   const res1350 = useMediaQuery({
     query: "(min-width: 1350px)",
@@ -55,7 +61,7 @@ const App = () => {
 
   return (
     <>
-      <Global />
+      <Global sub={sub} />
       <All>
         <Nav
           res900={res900}
@@ -70,7 +76,7 @@ const App = () => {
         <Plan res1350={res1350} res900={res900} />
         <Features res900={res900} />
         <Stats />
-        <Blog res900={res900} res600={res600} />
+        <Blog res900={res900} res600={res600} sub={sub} setSub={setSub} />
       </All>
     </>
   );
