@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import Button from "./Button";
 import TitleText from "./TitleText";
 import styled from "styled-components";
@@ -82,9 +83,17 @@ const Alert = styled.div`
 const SliderForm = ({ res600, sub, setSub }) => {
   const [form, setForm] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    form !== "" && setSub(true);
+  const { register, handleSubmit } = useForm();
+
+  // const Submit = (e) => {
+  //   e.preventDefault();
+  //   form !== "" && setSub(true);
+  // };
+
+  const OnSubmit = (data) => {
+    data.letter !== "" && setSub(true);
+    setForm(data.letter);
+    console.log("data", data);
   };
 
   return (
@@ -97,12 +106,12 @@ const SliderForm = ({ res600, sub, setSub }) => {
         </p>
       </TitleText>
 
-      <Form res600={res600} onSubmit={handleSubmit}>
+      <Form res600={res600} onSubmit={handleSubmit(OnSubmit)}>
         <input
+          name="letter"
           type="email"
           placeholder="Email address"
-          value={form}
-          onChange={(e) => setForm(e.target.value)}
+          ref={register}
         />
         <Button
           height="59px"
@@ -121,7 +130,10 @@ const SliderForm = ({ res600, sub, setSub }) => {
             Your Email <b>{form}</b> is subscribed to the mailing list
           </span>
           <Button
-            onClick={() => setSub(false)}
+            onClick={() => {
+              setSub(false);
+              setForm("");
+            }}
             width="70px"
             borderRadius="30px"
           >
