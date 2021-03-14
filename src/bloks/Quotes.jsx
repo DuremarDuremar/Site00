@@ -11,9 +11,11 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 `;
 const Content = styled.div`
   width: 887px;
+  position: relative;
   /* background-color: pink; */
   display: flex;
   align-items: center;
@@ -29,7 +31,10 @@ const Slider = styled.div`
 `;
 
 const Items = styled.div`
-  position: relative;
+  position: ${(props) => (props.ab ? "absolute" : "relative")};
+  left: ${(props) => props.ab && "95%"};
+  z-index: ${(props) => !props.ab && "1"};
+  opacity: ${(props) => props.ab && "0.4"};
   width: 423px;
   min-height: 175.37px;
   background: #fff;
@@ -52,7 +57,7 @@ const Items = styled.div`
 const Quotes = () => {
   const [page, setPage] = useState(1);
 
-  const ImagesFase = () => {
+  const ImagesFase = (n) => {
     const arr = [
       "assets/shop.jpg",
       "assets/kam.jpg",
@@ -62,13 +67,13 @@ const Quotes = () => {
       "assets/gig.jpg",
     ];
     const res = arr.filter((item, index) => {
-      return index + 1 === page;
+      return index + 1 === n;
     });
     return res[0];
   };
 
-  const itemText = () => {
-    switch (page) {
+  const itemText = (n) => {
+    switch (n) {
       case 1:
         return (
           <p>
@@ -146,8 +151,8 @@ const Quotes = () => {
         </TitleText>
         <Slider>
           <Items>
-            {itemText()}
-            <QuotersImg pic={ImagesFase()} />
+            {itemText(page)}
+            <QuotersImg pic={ImagesFase(page)} />
           </Items>
           <Circles
             page={page}
@@ -157,6 +162,10 @@ const Quotes = () => {
             MarginTop="calc(3.5vw + 16px)"
           />
         </Slider>
+        <Items ab>
+          {itemText(page > 5 ? 1 : page + 1)}
+          <QuotersImg pic={ImagesFase(page > 5 ? 1 : page + 1)} />
+        </Items>
       </Content>
     </Wrapper>
   );
