@@ -77,7 +77,7 @@ const App = () => {
         <Features res900={res900} />
         <Stats />
         <Blog res900={res900} res600={res600} sub={sub} setSub={setSub} />
-        <Quotes />
+        <Quotes res900={res900} res450={res450} />
       </All>
     </>
   );

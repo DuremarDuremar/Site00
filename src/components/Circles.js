@@ -7,6 +7,7 @@ const CirclesWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: ${(props) => props.MarginTop || "calc(7.5vw + 16px)"};
+  padding: 20px 0;
 `;
 const ItemCircles = styled.div`
   width: 8px;

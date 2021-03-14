@@ -7,19 +7,21 @@ import QuotersImg from "../components/QuotersImg";
 const Wrapper = styled.div`
   background: linear-gradient(180deg, #eaf0ff 0%, #f6f9ff 100%);
   max-width: 100%;
-  height: 479px;
+  height: ${(props) => (props.res900 ? "479px" : "625px")};
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 `;
 const Content = styled.div`
-  width: 887px;
+  width: calc(700px + 13.8vw);
   position: relative;
-  /* background-color: pink; */
+  padding: 12px 0;
   display: flex;
+  flex-direction: ${(props) => (props.res900 ? "row" : "column")};
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${(props) =>
+    props.res900 ? "space-between" : "space-evenly"};
   height: 100%;
 `;
 
@@ -34,7 +36,9 @@ const Items = styled.div`
   position: ${(props) => (props.ab ? "absolute" : "relative")};
   left: ${(props) => props.ab && "95%"};
   z-index: ${(props) => !props.ab && "1"};
-  opacity: ${(props) => props.ab && "0.4"};
+  opacity: ${(props) => props.ab && "0.3"};
+  transform: ${(props) =>
+    props.ab && "matrix3d(1,0,0.00,0,0.00,1,0.00,-0.0014,0,0,1,0,0,0,0,1);"};
   width: 423px;
   min-height: 175.37px;
   background: #fff;
@@ -54,7 +58,7 @@ const Items = styled.div`
   }
 `;
 
-const Quotes = () => {
+const Quotes = ({ res900, res450 }) => {
   const [page, setPage] = useState(1);
 
   const ImagesFase = (n) => {
@@ -129,8 +133,8 @@ const Quotes = () => {
   };
 
   return (
-    <Wrapper>
-      <Content>
+    <Wrapper res900={res900}>
+      <Content res900={res900}>
         <TitleText
           maxWidthP="323px"
           textAlignh1="left"
