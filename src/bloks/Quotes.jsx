@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 `;
 const Content = styled.div`
   width: 887px;
-  background-color: pink;
+  /* background-color: pink; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,12 +31,14 @@ const Slider = styled.div`
 const Items = styled.div`
   position: relative;
   width: 423px;
-  height: 175.37px;
+  min-height: 175.37px;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+
   p {
+    padding: 35px 10px;
     max-width: 283px;
     font-family: Roboto;
     font-weight: normal;
@@ -50,16 +52,90 @@ const Items = styled.div`
 const Quotes = () => {
   const [page, setPage] = useState(1);
 
+  const ImagesFase = () => {
+    const arr = [
+      "assets/shop.jpg",
+      "assets/kam.jpg",
+      "assets/nic.jpg",
+      "assets/sartr.jpg",
+      "assets/haid.jpeg",
+      "assets/gig.jpg",
+    ];
+    const res = arr.filter((item, index) => {
+      return index + 1 === page;
+    });
+    return res[0];
+  };
+
+  const itemText = () => {
+    switch (page) {
+      case 1:
+        return (
+          <p>
+            Quidam vocibus eum ne, erat consectetuer voluptatibus ut nam. Eu usu
+            vidit tractatos, vero tractatos ius an, in mel diceret persecuti.
+          </p>
+        );
+      case 2:
+        return (
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Consequuntur nesciunt repudiandae neque libero rem assumenda
+            officiis quam alias quisquam incidunt?
+          </p>
+        );
+      case 3:
+        return (
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odit
+            beatae ad saepe excepturi vero cum, culpa eos, porro odio facilis,
+            architecto maiores ut. Sed reprehenderit blanditiis doloremque
+            repellat, autem sunt ut! Nemo, facere libero.
+          </p>
+        );
+      case 4:
+        return (
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat,
+            reiciendis!
+          </p>
+        );
+      case 5:
+        return (
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum
+            deleniti a soluta perferendis, expedita aut corporis sed ut, labore
+            explicabo veniam quos at dolorum amet tempora sapiente sint cum quas
+            animi voluptas enim quasi! Tenetur exercitationem possimus eum nam
+            quam.
+          </p>
+        );
+      case 6:
+        return (
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit eum
+            dignissimos voluptatibus! Ad repellat totam nihil consectetur ut
+            blanditiis quibusdam praesentium quae.
+          </p>
+        );
+      default:
+        <p></p>;
+    }
+  };
+
   return (
     <Wrapper>
       <Content>
         <TitleText
-          maxWidthP="340px"
+          maxWidthP="323px"
           textAlignh1="left"
           textAlignP="left"
           textAlignh4="left"
           paddingTopP="14px"
           paddingToph1="31px"
+          fontSizeP="12px"
+          lineHeightP="23px"
+          colorP="#A4ABC8"
         >
           <h4>TESTIMONIALS</h4>
           <h1>Customers's quotes</h1>
@@ -70,12 +146,8 @@ const Quotes = () => {
         </TitleText>
         <Slider>
           <Items>
-            <p>
-              Quidam vocibus eum ne, erat consectetuer voluptatibus ut nam. Eu
-              usu vidit tractatos, vero tractatos ius an, in mel diceret
-              persecuti.
-            </p>
-            <QuotersImg pic={"assets/gig.jpg"} />
+            {itemText()}
+            <QuotersImg pic={ImagesFase()} />
           </Items>
           <Circles
             page={page}
