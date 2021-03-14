@@ -5,11 +5,12 @@ import TitleText from "./TitleText";
 import styled from "styled-components";
 
 const FormWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px 10px;
-  min-height: ${(props) => !props.res600 && "270px"};
+  min-height: ${(props) => !props.res600 && "300px"};
 `;
 const Form = styled.form`
   display: flex;
@@ -87,7 +88,8 @@ const Errors = styled.div`
   letter-spacing: 0.03em;
   color: #8d96bd;
   text-align: center;
-  margin-top: 6px;
+  margin-top: ${(props) => (!props.res600 ? "80px" : "30px")};
+
   i {
     color: red;
   }
@@ -150,7 +152,7 @@ const SliderForm = ({ res600, sub, setSub }) => {
         </Alert>
       )}
       {errors.email && (
-        <Errors>
+        <Errors res600={res600}>
           <i className="fas fa-exclamation-circle"></i> please enter email
         </Errors>
       )}

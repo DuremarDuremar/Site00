@@ -8,6 +8,7 @@ import Blog0104 from "../img/blog4.jpg";
 import Blog0105 from "../img/blog5.jpg";
 import TitleText from "../components/TitleText";
 import Button from "../components/Button";
+import Circles from "../components/Circles";
 import SliderForm from "../components/Form";
 
 const lupa = (
@@ -275,20 +276,6 @@ const Buttons = styled.div`
     }
   }
 `;
-const Circles = styled.div`
-  width: 48px;
-  height: 8px;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8.5vw;
-`;
-const ItemCircles = styled.div`
-  width: 8px;
-  height: 8px;
-  background-color: ${(props) => (props.activ ? "#5e81fe" : "#d1d6e3")};
-  border-radius: 100%;
-  cursor: pointer;
-`;
 
 const Arrows600 = styled.div`
   display: flex;
@@ -433,24 +420,6 @@ const Blog = ({ res900, res600, sub, setSub }) => {
     </SliderLeft2>
   );
 
-  const circles = () => {
-    const arrow = [1, 2, 3].map((item, index) => {
-      return page === index + 1 ? (
-        <ItemCircles
-          key={index}
-          activ
-          onClick={() => setPage(index + 1)}
-        ></ItemCircles>
-      ) : (
-        <ItemCircles
-          key={index}
-          onClick={() => setPage(index + 1)}
-        ></ItemCircles>
-      );
-    });
-    return <Circles>{arrow}</Circles>;
-  };
-
   const arrow = (n) => {
     if (n === left) {
       return (
@@ -520,7 +489,7 @@ const Blog = ({ res900, res600, sub, setSub }) => {
             <SliderForm res600={res600} sub={sub} setSub={setSub} />
           )}
         </Slider>
-        {circles()}
+        <Circles page={page} setPage={setPage} number={3} />
       </Content>
       {res600 && !modal && arrow(right)}
       {modal && (
