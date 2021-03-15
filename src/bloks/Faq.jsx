@@ -68,14 +68,15 @@ const itemContent = [
 
 const Wrapper = styled.div`
   max-width: 100%;
-  height: 964px;
+  min-height: 884px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
 const Content = styled.div`
-  width: 743px;
+  width: ${(props) => (props.res900 ? "743px" : "60vw")};
+  padding: 25px 20px;
 `;
 const Items = styled.div`
   margin-top: 68px;
@@ -102,11 +103,12 @@ const ItemTitle = styled.div`
   }
   svg {
     margin-top: 4px;
+    min-width: 18px;
   }
 `;
 const ItemBlock = styled.div`
-  display: ${(props) => (props.active ? "flex" : "none")};
-  /* visibility: ${(props) => (props.active ? "visible" : "hidden")}; */
+  display: ${(props) =>
+    props.active ? (props.res900 ? "flex" : "block") : "none"};
   justify-content: space-evenly;
   padding-bottom: 20px;
   > p {
@@ -119,12 +121,13 @@ const ItemBlock = styled.div`
     color: #8d96bd;
   }
   button {
+    margin-top: ${(props) => !props.res900 && "20px"};
     align-self: center;
   }
 `;
 
-const Faq = () => {
-  const [activ, setActiv] = useState(1);
+const Faq = ({ res900 }) => {
+  const [activ, setActiv] = useState(3);
 
   const stopPro = (e) => {
     e.stopPropagation();
@@ -142,10 +145,10 @@ const Faq = () => {
           {activ === index + 1 ? up : down}
           <h5>{item.title}</h5>
         </ItemTitle>
-        <ItemBlock active={activ === index + 1 ? true : false}>
+        <ItemBlock res900={res900} active={activ === index + 1 ? true : false}>
           <p>{item.text}</p>
           <Button
-            width="195px"
+            width={res900 ? "195px" : "calc(100px + 21vw)"}
             background="#E8ECF4"
             color="#7382A3"
             onClick={(e) => stopPro(e)}
@@ -159,7 +162,7 @@ const Faq = () => {
 
   return (
     <Wrapper>
-      <Content>
+      <Content res900={res900}>
         <TitleText fontSizeh1="24px" lineHeighth1="30px">
           <h4>Customer help</h4>
           <h1>Frequently asked questions</h1>
