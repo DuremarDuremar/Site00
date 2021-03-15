@@ -37,9 +37,10 @@ const Items = styled.div`
   left: ${(props) => props.ab && "95%"};
   z-index: ${(props) => !props.ab && "1"};
   opacity: ${(props) => props.ab && "0.3"};
+  width: ${(props) => (props.res450 ? " 423px" : "90vw")};
   transform: ${(props) =>
     props.ab && "matrix3d(1,0,0.00,0,0.00,1,0.00,-0.0014,0,0,1,0,0,0,0,1);"};
-  width: 423px;
+  /* width: 423px; */
   min-height: 175.37px;
   background: #fff;
   display: flex;
@@ -136,10 +137,10 @@ const Quotes = ({ res900, res450 }) => {
     <Wrapper res900={res900}>
       <Content res900={res900}>
         <TitleText
-          maxWidthP="323px"
-          textAlignh1="left"
-          textAlignP="left"
-          textAlignh4="left"
+          maxWidthP={res450 ? "323px" : "240px"}
+          textAlignh1={res450 ? "left" : "center"}
+          textAlignP={res450 ? "left" : "center"}
+          textAlignh4={res450 ? "left" : "center"}
           paddingTopP="14px"
           paddingToph1="31px"
           fontSizeP="12px"
@@ -154,7 +155,7 @@ const Quotes = ({ res900, res450 }) => {
           </p>
         </TitleText>
         <Slider>
-          <Items>
+          <Items res450={res450}>
             {itemText(page)}
             <QuotersImg pic={ImagesFase(page)} />
           </Items>

@@ -9,9 +9,9 @@ import Features from "./bloks/Features.jsx";
 import Stats from "./bloks/Stats.jsx";
 import Blog from "./bloks/Blog.jsx";
 import Quotes from "./bloks/Quotes.jsx";
-// import Started from "./bloks/Started.jsx";
-// import Faq from "./bloks/Faq.jsx";
-// import NewsLetter from "./bloks/NewsLetter.jsx";
+import NewsLetter from "./bloks/NewsLetter.jsx";
+import Started from "./bloks/Started.jsx";
+import Faq from "./bloks/Faq.jsx";
 
 const Global = createGlobalStyle`
 
@@ -78,6 +78,9 @@ const App = () => {
         <Stats />
         <Blog res900={res900} res600={res600} sub={sub} setSub={setSub} />
         <Quotes res900={res900} res450={res450} />
+        <Faq />
+        <NewsLetter />
+        <Started />
       </All>
     </>
   );
