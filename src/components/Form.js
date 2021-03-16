@@ -7,20 +7,23 @@ import styled from "styled-components";
 const FormWrapper = styled.div`
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(props) => (props.letter ? "row" : "column")};
   align-items: center;
+  justify-content: space-between;
   padding: 20px 10px;
+  width: ${(props) => props.letter && "100%"};
   min-height: ${(props) => !props.res600 && "300px"};
 `;
 const Form = styled.form`
   display: flex;
   height: 59px;
   margin-top: 5vw;
-  display: ${(props) => (props.res600 ? "flex" : "block")};
+  display: ${(props) => (props.res600 || props.letter ? "flex" : "block")};
 
   input {
     height: 59px;
-    width: ${(props) => (props.res600 ? "279px" : "calc(170px + 20vw)")};
+    width: ${(props) =>
+      props.res600 || props.letter ? "279px" : "calc(170px + 20vw)"};
     outline: none;
     border: none;
     background-color: #efeff7;
@@ -38,7 +41,7 @@ const Form = styled.form`
     color: #7a85ad;
   }
   button {
-    margin-top: ${(props) => !props.res600 && "12px"};
+    margin-top: ${(props) => !props.res600 && !props.letter && "12px"};
   }
 `;
 const Alert = styled.div`
@@ -94,7 +97,7 @@ const Errors = styled.div`
     color: red;
   }
 `;
-const SliderForm = ({ res600, sub, setSub }) => {
+const SliderForm = ({ res600, sub, setSub, letter }) => {
   const [form, setForm] = useState("");
 
   const { register, handleSubmit, errors } = useForm();
@@ -106,8 +109,14 @@ const SliderForm = ({ res600, sub, setSub }) => {
   };
 
   return (
-    <FormWrapper res600={res600}>
-      <TitleText maxWidthP="300px">
+    <FormWrapper res600={res600} letter={letter}>
+      <TitleText
+        maxWidthP={letter ? "330px" : "300px"}
+        textAlignP={letter && "left"}
+        textAlignh4={letter && "left"}
+        fontSizeh4="18px"
+        lineHeighth4="22px"
+      >
         <h4>Sign up for newsletter</h4>
         <p>
           Cu qui soleat partiendo urbanitas. Eum aperiri indoctum eu, homero
@@ -115,7 +124,7 @@ const SliderForm = ({ res600, sub, setSub }) => {
         </p>
       </TitleText>
 
-      <Form res600={res600} onSubmit={handleSubmit(OnSubmit)}>
+      <Form res600={res600} letter={letter} onSubmit={handleSubmit(OnSubmit)}>
         <input
           name="email"
           type="email"

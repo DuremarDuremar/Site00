@@ -6,8 +6,8 @@ const StyledTitleText = styled.div`
     font-family: Roboto;
     font-style: normal;
     font-weight: 500;
-    font-size: 10px;
-    line-height: 12px;
+    font-size: ${(props) => props.fontSizeh4 || "10px"};
+    line-height: ${(props) => props.lineHeighth4 || "12px"};
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: ${(props) => props.colorh4 || "#3d4f9f"};
