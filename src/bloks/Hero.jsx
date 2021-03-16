@@ -51,8 +51,8 @@ const Hero = ({ logoImg }) => {
         <TitleText
           shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           fontWeighth1="300"
-          fontSizeh1="48px"
-          lineHeighth1="60px"
+          fontSizeh1="calc(34px + 1vw)"
+          lineHeighth1="calc(33px + 2vw)"
           paddingToph1="16px"
         >
           <h4>PLAN YOUR LIFE</h4>

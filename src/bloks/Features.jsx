@@ -6,7 +6,7 @@ import FonImage from "../img/clouds.png";
 
 const Wrapper = styled.div`
   max-width: 100%;
-  height: 894px;
+  min-height: 894px;
   background-image: url(${FonImage});
   background-repeat: no-repeat;
   background-size: contain;
@@ -17,16 +17,18 @@ const Wrapper = styled.div`
 `;
 const Content = styled.div`
   max-width: 1200px;
-  height: ${(props) => (props.res900 ? "573px" : "800px")};
+  min-height: 573px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 50px 0;
 `;
 const Items = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: space-between;
   justify-content: space-between;
+  padding-top: ${(props) => (props.res900 ? "0" : "50px")};
 
   span {
     display: ${(props) => (props.res900 ? "inline" : "none")};
@@ -39,7 +41,8 @@ const Items = styled.div`
 `;
 const Item = styled.div`
   margin-bottom: ${(props) => (props.res900 ? "0" : "30px")};
-  flex: ${(props) => (props.res900 ? "1 1 auto" : "1 1 50%")};
+  flex: ${(props) =>
+    props.res900 ? "1 1 auto" : props.res450 ? "1 1 50%" : "1 1 100%"};
   div {
     width: 69px;
     height: 69px;
@@ -93,13 +96,13 @@ const WrapperButton = styled.div`
 const Features = ({ res900, res450 }) => {
   return (
     <Wrapper>
-      <Content res900={res900}>
+      <Content>
         <TitleText fontSizeh1="24px" lineHeighth1="30px">
           <h4>ABOUT US</h4>
           <h1>Read about our app</h1>
         </TitleText>
         <Items res900={res900}>
-          <Item res900={res900}>
+          <Item res900={res900} res450={res450}>
             <div>
               <svg
                 width="18"
@@ -121,7 +124,7 @@ const Features = ({ res900, res450 }) => {
             </p>
           </Item>
           <span></span>
-          <Item res900={res900}>
+          <Item res900={res900} res450={res450}>
             <div>
               <svg
                 width="28"
@@ -144,7 +147,7 @@ const Features = ({ res900, res450 }) => {
             </p>
           </Item>
           <span></span>
-          <Item res900={res900}>
+          <Item res900={res900} res450={res450}>
             <div>
               <svg
                 width="22"
@@ -164,7 +167,7 @@ const Features = ({ res900, res450 }) => {
             <p>Vim ne tacimates neglegentur. Erat diceret omittam at est.</p>
           </Item>
           <span></span>
-          <Item res900={res900}>
+          <Item res900={res900} res450={res450}>
             <div>
               <svg
                 width="21"
@@ -188,9 +191,13 @@ const Features = ({ res900, res450 }) => {
           <Button background="#FFD7D7" color="#D43F3F">
             <p>Read more</p>
           </Button>
-          <span></span>
-          <h5>OR</h5>
-          <span></span>
+          {res450 && (
+            <>
+              <span></span>
+              <h5>OR</h5>
+              <span></span>
+            </>
+          )}
           <Button>
             <p>Get started</p>
           </Button>
