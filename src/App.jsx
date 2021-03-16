@@ -71,16 +71,16 @@ const App = () => {
           menuActiv={menuActiv}
           setMenuActiv={setMenuActiv}
         />
-        <Hero logoImg={logoImg} />
+        {/* <Hero logoImg={logoImg} /> */}
         <Costumers res900={res900} res450={res450} />
         <Plan res1350={res1350} res900={res900} />
-        <Features res900={res900} />
+        <Features res900={res900} res450={res450} />
         <Stats />
         <Blog res900={res900} res600={res600} sub={sub} setSub={setSub} />
         <Quotes res900={res900} res450={res450} />
         <Faq res900={res900} />
+        <Started res450={res450} />
         <NewsLetter />
-        <Started />
       </All>
     </>
   );

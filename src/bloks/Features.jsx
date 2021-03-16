@@ -90,7 +90,7 @@ const WrapperButton = styled.div`
   }
 `;
 
-const Features = ({ res900 }) => {
+const Features = ({ res900, res450 }) => {
   return (
     <Wrapper>
       <Content res900={res900}>
