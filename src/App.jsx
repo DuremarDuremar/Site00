@@ -65,7 +65,7 @@ const App = () => {
       <All>
         <Nav
           res900={res900}
-          res600={res600}
+          res450={res450}
           logoImg={logoImg}
           setLogoImg={setLogoImg}
           menuActiv={menuActiv}

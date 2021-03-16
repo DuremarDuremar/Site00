@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   max-width: 100%;
-  height: 60px;
+  min-height: 60px;
   transition: all ease-out 0.35s;
 `;
 const Content = styled.div`
@@ -40,7 +40,11 @@ const Logo = styled.div`
     }
   `}
    margin-right: ${(props) =>
-    props.logoImg && !props.res900 ? "auto" : props.res900 ? "5.4vw" : "10px"};
+    props.logoImg && !props.res900 && props.res450
+      ? "auto"
+      : props.res900
+      ? "5.4vw"
+      : "10px"};
 
   img {
     display: block;
@@ -74,7 +78,7 @@ const AdapMenu = styled(Menu)`
   max-width: 600px;
   background-color: #f5f8ff;
   flex-wrap: wrap;
-  margin: 0px auto;
+  margin: 10px auto 0;
   border-radius: 30px 30px 0 0;
   li {
     display: block;
@@ -115,7 +119,8 @@ const Links = styled.ul`
 `;
 
 const Nav = ({
-  res600,
+  res450,
+
   res900,
   logoImg,
   setLogoImg,
@@ -132,25 +137,36 @@ const Nav = ({
 
   /////////////////////////////////////////////////////
 
-  const Items = ["Home", "Blog", "Features", "Pricing", "Documentation"].map(
-    (item, index) => {
-      return (
-        <MenuLi
-          active={menuActiv === index + 1 ? "true" : "false"}
-          key={item}
-          onClick={() => setMenuActiv(index + 1)}
-        >
-          {item}
-        </MenuLi>
-      );
-    }
-  );
+  const arr451 = ["Home", "Blog", "Features", "Pricing", "Documentation"];
+  const arr449 = [
+    "Home",
+    "Blog",
+    "Features",
+    "Pricing",
+    "Documentation",
+    "Get Started",
+  ];
+
+  const arr = res450 ? arr451 : arr449;
+
+  const Items = arr.map((item, index) => {
+    return (
+      <MenuLi
+        active={menuActiv === index + 1 ? "true" : "false"}
+        key={item}
+        onClick={() => setMenuActiv(index + 1)}
+      >
+        {item}
+      </MenuLi>
+    );
+  });
 
   return (
     <Wrapper>
       <Content res900={res900}>
         <Logo
           res900={res900}
+          res450={res450}
           logoImg={logoImg}
           onClick={() => setLogoImg(!logoImg)}
         >
@@ -173,9 +189,13 @@ const Nav = ({
           </li>
         </Links>
 
-        <Button width={!res600 ? "90px" : "113px"}>
-          <p>Get started</p>
-        </Button>
+        {res450 && (
+          <>
+            <Button>
+              <p>Get started</p>
+            </Button>
+          </>
+        )}
       </Content>
       {logoImg && <AdapMenu>{Items}</AdapMenu>}
     </Wrapper>

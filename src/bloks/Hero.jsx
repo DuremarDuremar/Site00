@@ -5,8 +5,7 @@ import TitleText from "../components/TitleText";
 
 const Wrapper = styled.div`
   max-width: 100%;
-  height: 570px;
-  /* margin: 0px auto; */
+  min-height: 570px;
   transition: all ease-out 0.35s;
   background-image: url(${FonImage});
   background-repeat: no-repeat;
