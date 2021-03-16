@@ -11,15 +11,27 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 const Content = styled.div`
-  width: 887px;
+  width: ${(props) =>
+    props.res900
+      ? "calc(600px + 21.8vw)"
+      : props.res600
+      ? "calc(200px + 52.8vw)"
+      : "100%"};
   min-height: 95px;
+  padding: 0 8px;
 `;
 
-const NewsLetter = ({ sub, setSub }) => {
+const NewsLetter = ({ res900, res600, sub, setSub }) => {
   return (
     <Wrapper>
-      <Content>
-        <SliderForm letter sub={sub} setSub={setSub}></SliderForm>
+      <Content res900={res900}>
+        <SliderForm
+          letter
+          sub={sub}
+          setSub={setSub}
+          res900={res900}
+          res600={res600}
+        ></SliderForm>
       </Content>
     </Wrapper>
   );

@@ -7,23 +7,39 @@ import styled from "styled-components";
 const FormWrapper = styled.div`
   position: relative;
   display: flex;
-  flex-direction: ${(props) => (props.letter ? "row" : "column")};
+  flex-direction: ${(props) =>
+    props.letter && props.res900 ? "row" : "column"};
   align-items: center;
-  justify-content: space-between;
-  padding: 20px 10px;
+  ${(props) =>
+    props.letter &&
+    `
+    justify-content: space-between;
+  `}
+  ${(props) =>
+    !props.letter &&
+    `
+    padding: 20px 10px;
+  `}
   width: ${(props) => props.letter && "100%"};
-  min-height: ${(props) => !props.res600 && "300px"};
+  min-height: ${(props) => !props.res600 && !props.letter && "300px"};
 `;
 const Form = styled.form`
   display: flex;
   height: 59px;
   margin-top: 5vw;
-  display: ${(props) => (props.res600 || props.letter ? "flex" : "block")};
+  display: ${(props) => (props.res600 ? "flex" : "block")};
+  ${(props) =>
+    props.res900 &&
+    `
+    padding-left: 20px;
+  `}
 
   input {
     height: 59px;
     width: ${(props) =>
-      props.res600 || props.letter ? "279px" : "calc(170px + 20vw)"};
+      props.res600 || (props.letter && props.res900)
+        ? "279px"
+        : "calc(160px + 16vw)"};
     outline: none;
     border: none;
     background-color: #efeff7;
@@ -41,7 +57,7 @@ const Form = styled.form`
     color: #7a85ad;
   }
   button {
-    margin-top: ${(props) => !props.res600 && !props.letter && "12px"};
+    margin-top: ${(props) => !props.res600 && "12px"};
   }
 `;
 const Alert = styled.div`
@@ -97,7 +113,7 @@ const Errors = styled.div`
     color: red;
   }
 `;
-const SliderForm = ({ res600, sub, setSub, letter }) => {
+const SliderForm = ({ res600, res900, sub, setSub, letter }) => {
   const [form, setForm] = useState("");
 
   const { register, handleSubmit, errors } = useForm();
@@ -107,65 +123,77 @@ const SliderForm = ({ res600, sub, setSub, letter }) => {
     setForm(data.email);
     // console.log("data", data);
   };
-
+  console.log(errors);
   return (
-    <FormWrapper res600={res600} letter={letter}>
-      <TitleText
-        maxWidthP={letter ? "330px" : "300px"}
-        textAlignP={letter && "left"}
-        textAlignh4={letter && "left"}
-        fontSizeh4="18px"
-        lineHeighth4="22px"
-      >
-        <h4>Sign up for newsletter</h4>
-        <p>
-          Cu qui soleat partiendo urbanitas. Eum aperiri indoctum eu, homero
-          alterum.
-        </p>
-      </TitleText>
-
-      <Form res600={res600} letter={letter} onSubmit={handleSubmit(OnSubmit)}>
-        <input
-          name="email"
-          type="email"
-          placeholder="Email address"
-          ref={register({ required: true, minLength: 10 })}
-        />
-
-        <Button
-          height="59px"
-          borderRadius="5px"
-          background="#4D6CE1"
-          color="#fff"
-          border="1px solid #efeff7"
-          width="184px"
+    <>
+      <FormWrapper res600={res600} res900={res900} letter={letter}>
+        <TitleText
+          maxWidthP={letter && res600 ? "330px" : "300px"}
+          textAlignP={letter && res600 && "left"}
+          textAlignh4={letter && res600 && "left"}
+          fontSizeh4="18px"
+          lineHeighth4="22px"
         >
-          <p>Save me</p>
-        </Button>
-      </Form>
-      {sub && (
-        <Alert>
-          <span>
-            Your Email <b>{form}</b> is subscribed to the mailing list
-          </span>
+          <h4>Sign up for newsletter</h4>
+          <p>
+            Cu qui soleat partiendo urbanitas. Eum aperiri indoctum eu, homero
+            alterum.
+          </p>
+        </TitleText>
+
+        <Form
+          res600={res600}
+          res900={res900}
+          letter={letter}
+          onSubmit={handleSubmit(OnSubmit)}
+        >
+          <input
+            name="email"
+            type="email"
+            placeholder="Email address"
+            ref={register({ required: true, minLength: 10 })}
+          />
+
           <Button
-            onClick={() => {
-              setSub(false);
-              setForm("");
-            }}
-            width="70px"
-            borderRadius="30px"
+            height="59px"
+            borderRadius="5px"
+            background="#4D6CE1"
+            color="#fff"
+            border="1px solid #efeff7"
+            width={letter && !res900 ? "calc(100px + 10vw) " : "184px"}
           >
-            <p>OK</p>
+            <p>Save me</p>
           </Button>
-        </Alert>
-      )}
-      {errors.email && (
-        <Errors res600={res600}>
+        </Form>
+        {sub && (
+          <Alert>
+            <span>
+              Your Email <b>{form}</b> is subscribed to the mailing list
+            </span>
+            <Button
+              onClick={() => {
+                setSub(false);
+                setForm("");
+              }}
+              width="70px"
+              borderRadius="30px"
+            >
+              <p>OK</p>
+            </Button>
+          </Alert>
+        )}
+        {errors.email && !letter && (
+          <Errors res600={res600} letter={letter}>
+            <i className="fas fa-exclamation-circle"></i> please enter email
+          </Errors>
+        )}
+      </FormWrapper>
+      {errors.email && letter && (
+        <Errors res600={res600} letter={letter}>
           <i className="fas fa-exclamation-circle"></i> please enter email
         </Errors>
       )}
-    </FormWrapper>
+    </>
   );
 };
 

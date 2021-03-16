@@ -80,7 +80,7 @@ const App = () => {
         <Quotes res900={res900} res450={res450} />
         <Faq res900={res900} />
         <Started res450={res450} />
-        <NewsLetter sub={sub} setSub={setSub} />
+        <NewsLetter res900={res900} res600={res600} sub={sub} setSub={setSub} />
       </All>
     </>
   );
