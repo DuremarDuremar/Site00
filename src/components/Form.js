@@ -123,7 +123,7 @@ const SliderForm = ({ res600, res900, sub, setSub, letter }) => {
     setForm(data.email);
     // console.log("data", data);
   };
-  console.log(errors);
+
   return (
     <>
       <FormWrapper res600={res600} res900={res900} letter={letter}>

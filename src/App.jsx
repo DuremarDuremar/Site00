@@ -38,7 +38,7 @@ li {
 
 const All = styled.div`
   max-width: 1440px;
-  margin: 0px auto;
+  margin: 0px auto 6vw;
 `;
 
 const App = () => {
@@ -81,6 +81,15 @@ const App = () => {
         <Faq res900={res900} />
         <Started res450={res450} />
         <NewsLetter res900={res900} res600={res600} sub={sub} setSub={setSub} />
+        <Nav
+          footer
+          res900={res900}
+          res450={res450}
+          logoImg={logoImg}
+          setLogoImg={setLogoImg}
+          menuActiv={menuActiv}
+          setMenuActiv={setMenuActiv}
+        />
       </All>
     </>
   );

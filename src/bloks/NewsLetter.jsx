@@ -4,7 +4,7 @@ import SliderForm from "../components/Form";
 
 const Wrapper = styled.div`
   background: #fcfdff;
-  min-height: 332px;
+  min-height: 382px;
   display: flex;
   flex-direction: column;
   justify-content: center;

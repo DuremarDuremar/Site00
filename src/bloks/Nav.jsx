@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 const Content = styled.div`
   max-width: 1216px;
-  margin: 19px auto 0;
+  margin: ${(props) => (props.footer ? "49px auto 0" : "19px auto 0")};
   display: flex;
   align-items: center;
   padding: 0 10px 3px;
@@ -61,11 +61,29 @@ const Menu = styled.ul`
   line-height: 15px;
   letter-spacing: 0.05em;
   text-shadow: 0px 0px 5px #e6e6e6;
+  position: relative;
   li {
     :not(:last-child) {
       margin-right: 42px;
     }
   }
+  ${(props) =>
+    props.footer &&
+    `
+  :after {
+    content: "Copyright © 2018 by Random site";
+    display: block;
+    position: absolute;
+    bottom: -40px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #aeb8d0;
+  }
+    }
+  `}
 `;
 
 const MenuLi = styled.li`
@@ -120,14 +138,16 @@ const Links = styled.ul`
 
 const Nav = ({
   res450,
-
   res900,
+  footer,
   logoImg,
   setLogoImg,
   menuActiv,
   setMenuActiv,
 }) => {
   ///////////////////////////////////////
+
+  console.log(footer);
 
   useEffect(() => {
     if (res900) {
@@ -163,7 +183,7 @@ const Nav = ({
 
   return (
     <Wrapper>
-      <Content res900={res900}>
+      <Content res900={res900} footer={footer}>
         <Logo
           res900={res900}
           res450={res450}
@@ -173,7 +193,7 @@ const Nav = ({
           <img src={logoImg ? logoactiv : logo} alt="logo" />
         </Logo>
 
-        {res900 && <Menu>{Items}</Menu>}
+        {res900 && <Menu footer={footer}>{Items}</Menu>}
         <Links logoImg={logoImg} res900={res900}>
           <li>
             <i className="fa fa-facebook" aria-hidden="true"></i>
@@ -198,6 +218,7 @@ const Nav = ({
         )}
       </Content>
       {logoImg && <AdapMenu>{Items}</AdapMenu>}
+      {/* {footer && <footer>Copyright © 2018 by Random site</footer>} */}
     </Wrapper>
   );
 };
