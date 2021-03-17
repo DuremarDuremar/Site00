@@ -87,8 +87,12 @@ const Menu = styled.ul`
   `}
 `;
 
-const MenuLi = styled.li`
-  color: ${(props) => (props.active === "true" ? "#5e81fe" : "#697ca6")};
+const MenuLi = styled.li``;
+
+const LinkNav = styled(Link)`
+  p {
+    color: ${(props) => (props.active === "true" ? "#5e81fe" : "#697ca6")};
+  }
 `;
 
 const AdapMenu = styled(Menu)`
@@ -170,14 +174,16 @@ const Nav = ({
 
   const Items = arr.map((item, index) => {
     return (
-      <MenuLi
-        active={menuActiv === index + 1 ? "true" : "false"}
-        key={item}
-        onClick={() => setMenuActiv(index + 1)}
-      >
-        <Link to={String(index + 1)} smooth={true} duration={1000}>
-          {item}
-        </Link>
+      <MenuLi key={item}>
+        <LinkNav
+          onClick={() => setMenuActiv(index + 1)}
+          active={menuActiv === index + 1 ? "true" : "false"}
+          to={String(index + 1)}
+          smooth={true}
+          duration={1000}
+        >
+          <p>{item}</p>
+        </LinkNav>
       </MenuLi>
     );
   });
