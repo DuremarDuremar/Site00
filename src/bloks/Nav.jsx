@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import logo from "../img/logo.jpg";
 import logoactiv from "../img/logoactiv.jpg";
 import styled from "styled-components";
+import { Link } from "react-scroll";
 
 const Wrapper = styled.div`
   max-width: 100%;
@@ -147,8 +148,6 @@ const Nav = ({
 }) => {
   ///////////////////////////////////////
 
-  console.log(footer);
-
   useEffect(() => {
     if (res900) {
       setLogoImg(false);
@@ -157,7 +156,7 @@ const Nav = ({
 
   /////////////////////////////////////////////////////
 
-  const arr451 = ["Home", "Blog", "Features", "Pricing", "Documentation"];
+  const arr451 = ["Home", "Blog", "Features", "Plan", "Faq"];
   const arr449 = [
     "Home",
     "Blog",
@@ -176,7 +175,9 @@ const Nav = ({
         key={item}
         onClick={() => setMenuActiv(index + 1)}
       >
-        {item}
+        <Link to={String(index + 1)} smooth={true} duration={1000}>
+          {item}
+        </Link>
       </MenuLi>
     );
   });

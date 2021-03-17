@@ -45,7 +45,7 @@ const Play = styled.div`
 const Hero = ({ logoImg }) => {
   return (
     <Wrapper>
-      <Content logoImg={logoImg}>
+      <Content logoImg={logoImg} id="1">
         <TitleText
           shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           fontWeighth1="300"

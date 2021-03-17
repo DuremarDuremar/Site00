@@ -162,7 +162,7 @@ const Faq = ({ res900 }) => {
 
   return (
     <Wrapper>
-      <Content res900={res900}>
+      <Content res900={res900} id="5">
         <TitleText fontSizeh1="24px" lineHeighth1="30px">
           <h4>Customer help</h4>
           <h1>Frequently asked questions</h1>

@@ -96,7 +96,7 @@ const WrapperButton = styled.div`
 const Features = ({ res900, res450 }) => {
   return (
     <Wrapper>
-      <Content>
+      <Content id="3">
         <TitleText fontSizeh1="24px" lineHeighth1="30px">
           <h4>ABOUT US</h4>
           <h1>Read about our app</h1>

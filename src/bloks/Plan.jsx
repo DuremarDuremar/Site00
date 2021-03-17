@@ -88,7 +88,7 @@ const LeftBlock = styled.div`
 const Plan = ({ res1350, res900 }) => {
   return (
     <Wrapper res900={res900}>
-      <Content res900={res900}>
+      <Content res900={res900} id="4">
         <LeftBlock>
           <TitleText
             textAlignP="left"

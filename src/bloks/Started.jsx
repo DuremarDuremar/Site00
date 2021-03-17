@@ -39,7 +39,7 @@ const Buttons = styled.div`
 const Started = ({ res450 }) => {
   return (
     <Wrapper>
-      <Content res450={res450}>
+      <Content res450={res450} id="6">
         <TitleText
           colorh4="#fff"
           colorh1="#fff"

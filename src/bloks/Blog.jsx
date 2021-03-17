@@ -460,7 +460,7 @@ const Blog = ({ res900, res600, sub, setSub }) => {
     <Wrapper page={page}>
       {res600 && !modal && arrow(left)}
 
-      <Content res900={res900}>
+      <Content res900={res900} id="2">
         <TitleText fontSizeh1="24px" lineHeighth1="30px">
           <h4>OUR RESOURCES</h4>
           <h1>Start reading our blog</h1>
