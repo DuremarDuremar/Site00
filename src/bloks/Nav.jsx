@@ -161,14 +161,7 @@ const Nav = ({
   /////////////////////////////////////////////////////
 
   const arr451 = ["Home", "Blog", "Features", "Plan", "Faq"];
-  const arr449 = [
-    "Home",
-    "Blog",
-    "Features",
-    "Pricing",
-    "Documentation",
-    "Get Started",
-  ];
+  const arr449 = ["Home", "Blog", "Features", "Plan", "Faq", "Get Started"];
 
   const arr = res450 ? arr451 : arr449;
 
